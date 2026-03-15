@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Escala de Densidad de Sarkis — Hookah UNLTD</title>
+    <meta name="description" content="Calculadora técnica y matemática para el packeo perfecto de cachimba. La Escala de Densidad de Sarkis por Sarkis Alexander, Hookah UNLTD.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #060407;
+            --deep: #0c0910;
+            --surface: rgba(14, 10, 20, 0.82);
+            --surface-hover: rgba(20, 14, 28, 0.9);
+            --border: rgba(200, 147, 42, 0.13);
+            --border-strong: rgba(200, 147, 42, 0.38);
+            --gold: #c8932a;
+            --gold-bright: #e4b84d;
+            --gold-dim: rgba(200, 147, 42, 0.45);
+            --ember: #e05500;
+            --text: #ede3d1;
+            --text-mid: rgba(237, 227, 209, 0.55);
+            --text-low: rgba(237, 227, 209, 0.28);
+
+            --fluff: #22d3ee;
+            --fluff-rgb: 34, 211, 238;
+            --semi-fluff: #60a5fa;
+            --semi-fluff-rgb: 96, 165, 250;
+            --normal: #facc15;
+            --normal-rgb: 250, 204, 21;
+            --semi-dense: #fb923c;
+            --semi-dense-rgb: 251, 146, 60;
+            --dense: #ef4444;
+            --dense-rgb: 239, 68, 68;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--void);
+            color: var(--text);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── BACKGROUND ── */
+        #canvas-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 70% 45% at 50% 0%, rgba(200,147,42,0.055) 0%, transparent 70%),
+                radial-gradient(ellipse 45% 55% at 15% 85%, rgba(224,85,0,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 85% 25%, rgba(34,211,238,0.018) 0%, transparent 60%);
+        }
+
+        /* ── LAYOUT ── */
+        .wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── HEADER ── */
+        header {
+            padding: 72px 0 48px;
+            text-align: center;
+        }
+
+        .byline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'DM Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--border-strong);
+            padding: 7px 18px;
+            margin-bottom: 40px;
+            opacity: 0.85;
+        }
+
+        .byline::before, .byline::after {
+            content: '';
+            width: 14px;
+            height: 1px;
+            background: var(--gold-dim);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: clamp(42px, 9vw, 88px);
+            letter-spacing: 0.03em;
+            line-height: 0.9;
+            color: var(--text);
+        }
+
+        h1 .eyebrow {
+            display: block;
+            font-size: clamp(10px, 2vw, 15px);
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 21px);
+            color: var(--text-mid);
+            max-width: 540px;
+            margin: 26px auto 0;
+            line-height: 1.65;
+        }
+
+        .hr-gold {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 36px auto;
+        }
+
+        /* ── CARDS (shared) ── */
+        .glass {
+            background: var(--surface);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,147,42,0.5), transparent);
+            pointer-events: none;
+        }
+
+        /* ── CALCULATOR CARD ── */
+        .calc-card {
+            padding: 40px 44px;
+            margin-bottom: 18px;
+        }
+
+        .section-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-tag::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .input-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .input-note {
+            font-size: 15.5px;
+            font-style: italic;
+            color: var(--text-mid);
+            line-height: 1.55;
+            margin-bottom: 28px;
+            max-width: 600px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .slider-col {
+            flex: 1;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--gold) var(--pct, 24.5%),
+                rgba(255,255,255,0.08) var(--pct, 24.5%)
+            );
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, var(--gold-bright), var(--gold));
+            cursor: pointer;
+            box-shadow: 0 0 0 3px rgba(200,147,42,0.18), 0 0 20px rgba(200,147,42,0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+            box-shadow: 0 0 0 4px rgba(200,147,42,0.25), 0 0 30px rgba(200,147,42,0.65);
+        }
+
+        .slider-endpoints {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: var(--text-low);
+            letter-spacing: 1px;
+        }
+
+        .num-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        input[type="number"] {
+            width: 96px;
+            padding: 11px 14px;
+            background: rgba(200,147,42,0.05);
+            border: 1px solid var(--border-strong);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            outline: none;
+            -moz-appearance: textfield;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+        input[type="number"]:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 1px rgba(200,147,42,0.2), 0 0 24px rgba(200,147,42,0.12);
+        }
+
+        .num-unit {
+            position: absolute;
+            right: -22px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-low);
+        }
+
+        .calc-btn {
+            width: 100%;
+            margin-top: 28px;
+            padding: 18px;
+            background: linear-gradient(115deg, #c8932a 0%, #e05500 100%);
+            border: none;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #07050a;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+        }
+
+        .calc-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(115deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(200,147,42,0.28), 0 0 80px rgba(224,85,0,0.12);
+        }
+
+        .calc-btn:hover::after { opacity: 1; }
+
+        .calc-btn:active { transform: translateY(0); }
+
+        /* ── DENSE BASE BANNER ── */
+        .base-banner {
+            display: none;
+            background: rgba(200,147,42,0.055);
+            border: 1px solid var(--border-strong);
+            padding: 22px 36px;
+            text-align: center;
+            margin-bottom: 18px;
+            animation: slideUp 0.45s ease forwards;
+        }
+
+        .base-banner.on { display: block; }
+
+        .base-banner-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-low);
+            margin-bottom: 4px;
+        }
+
+        .base-banner-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 48px;
+            font-weight: 500;
+            color: var(--gold-bright);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .base-banner-num sup {
+            font-size: 20px;
+            opacity: 0.6;
+            letter-spacing: 0;
+            font-weight: 300;
+        }
+
+        .base-banner-sub {
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-low);
+            margin-top: 5px;
+        }
+
+        /* ── RESULTS ── */
+        #results { display: none; }
+        #results.on { display: block; }
+
+        .results-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-low);
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        /* ── PACK CARD ── */
+        .pack-card {
+            border-left: 3px solid var(--c, var(--gold));
+            padding: 26px 30px 22px;
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.25s;
+        }
+
+        .pack-card.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .pack-card:hover {
+            box-shadow: -4px 0 32px rgba(var(--c-rgb, 200,147,42), 0.14),
+                        0 0 48px rgba(var(--c-rgb, 200,147,42), 0.04);
+        }
+
+        .card-shine {
+            position: absolute;
+            top: 0; left: 0;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(var(--c-rgb, 200,147,42), 0.04) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .card-badge {
+            font-family: 'DM Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 1.5px;
+            color: var(--c, var(--gold));
+            background: rgba(var(--c-rgb, 200,147,42), 0.1);
+            border: 1px solid rgba(var(--c-rgb, 200,147,42), 0.28);
+            padding: 4px 9px;
+            flex-shrink: 0;
+            align-self: center;
+            white-space: nowrap;
+        }
+
+        .card-weight {
+            font-family: 'DM Mono', monospace;
+            font-size: 50px;
+            font-weight: 500;
+            color: var(--c, var(--gold));
+            letter-spacing: -3px;
+            line-height: 1;
+            margin: 4px 0 6px;
+        }
+
+        .card-weight sup {
+            font-size: 19px;
+            font-weight: 300;
+            opacity: 0.55;
+            letter-spacing: 0;
+        }
+
+        .card-desc {
+            font-style: italic;
+            font-size: 15.5px;
+            color: var(--text-mid);
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        /* Bar */
+        .bar-wrap { margin: 12px 0 14px; }
+
+        .bar-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-low);
+            margin-bottom: 7px;
+        }
+
+        .bar-track {
+            height: 3px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--c, var(--gold));
+            box-shadow: 0 0 10px var(--c, var(--gold));
+            border-radius: 2px;
+            transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Brand chips */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .chip {
+            font-family: 'DM Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 0.5px;
+            color: var(--text-low);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.09);
+            padding: 4px 10px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .chip:hover {
+            border-color: rgba(var(--c-rgb, 200,147,42), 0.38);
+            color: var(--c, var(--gold));
+        }
+
+        /* Micro-variations */
+        .micros {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .micros-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-low);
+            margin-bottom: 10px;
+        }
+
+        .micros-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .micro {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 11px 10px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .micro:hover {
+            border-color: rgba(var(--c-rgb, 200,147,42), 0.22);
+        }
+
+        .micro-n {
+            font-family: 'DM Mono', monospace;
+            font-size: 8.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-low);
+            margin-bottom: 5px;
+        }
+
+        .micro-v {
+            font-family: 'DM Mono', monospace;
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(var(--c-rgb, 200,147,42), 0.8);
+        }
+
+        .micro-v small { font-size: 11px; opacity: 0.55; }
+
+        /* ── HOW TO ── */
+        .howto {
+            margin: 60px 0 52px;
+        }
+
+        .howto h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .howto-sub {
+            text-align: center;
+            font-style: italic;
+            font-size: 17px;
+            color: var(--text-mid);
+            margin-bottom: 34px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 14px;
+        }
+
+        .step {
+            padding: 24px 22px;
+        }
+
+        .step-num {
+            font-family: 'Cinzel', serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: rgba(200,147,42,0.1);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+        }
+
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-body {
+            font-size: 14.5px;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ── FORMULA REFERENCE ── */
+        .formula-ref {
+            margin: 0 0 52px;
+            padding: 32px 36px;
+        }
+
+        .formula-ref .section-tag { margin-bottom: 20px; }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .formula-cell {
+            background: var(--deep);
+            padding: 16px 18px;
+            transition: background 0.2s;
+        }
+
+        .formula-cell:hover { background: var(--surface-hover); }
+
+        .fc-name {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-mid);
+            margin-bottom: 6px;
+        }
+
+        .fc-formula {
+            font-family: 'DM Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--c, var(--gold));
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 36px 0 56px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 5px;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .footer-copy {
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-low);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .calc-card { padding: 28px 20px; }
+            .controls { flex-direction: column; align-items: stretch; }
+            .num-wrap { display: flex; align-items: center; gap: 12px; }
+            .num-unit { position: static; transform: none; }
+            input[type="number"] { flex: 1; }
+            .pack-card { padding: 22px 20px 18px; }
+            .card-weight { font-size: 40px; }
+            .formula-ref { padding: 24px 18px; }
+            header { padding: 48px 0 36px; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+<div class="ambient"></div>
+
+<div class="wrap">
+
+    <!-- HEADER -->
+    <header>
+        <div class="byline">Hookah UNLTD &mdash; Sarkis Alexander</div>
+        <h1>
+            <span class="eyebrow">La Escala de Densidad de</span>
+            SARKIS
+        </h1>
+        <p class="tagline">
+            La guía técnica y matemática para el packeo perfecto de tu cachimba.<br>
+            Elimina las suposiciones. Solo ciencia.
+        </p>
+        <div class="hr-gold"></div>
+    </header>
+
+    <!-- CALCULATOR -->
+    <div class="glass calc-card">
+        <div class="section-tag">Calculadora de Densidad</div>
+        <label class="input-title" for="slider">Cement Pack &mdash; Capacidad Máxima</label>
+        <p class="input-note">
+            La cantidad máxima absoluta de tabaco que cabe en tu cazoleta aplastado hasta la dureza máxima.
+            No se fuma a este nivel &mdash; solo sirve como tu número de referencia.
+        </p>
+        <div class="controls">
+            <div class="slider-col">
+                <input type="range" id="slider" min="5" max="60" value="22" step="0.5">
+                <div class="slider-endpoints">
+                    <span>5 g &nbsp;— cazoleta pequeña</span>
+                    <span>cazoleta grande —&nbsp; 60 g</span>
+                </div>
+            </div>
+            <div class="num-wrap">
+                <input type="number" id="numbox" min="5" max="60" value="22" step="0.5">
+                <span class="num-unit">g</span>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">Calcular Mi Escala</button>
+    </div>
+
+    <!-- DENSE BASE DISPLAY -->
+    <div class="base-banner" id="base-banner">
+        <div class="base-banner-label">Dense Pack Base — Piedra Angular</div>
+        <div class="base-banner-num" id="base-num">—<sup>g</sup></div>
+        <div class="base-banner-sub">90% del Cement Pack · referencia para todos los demás niveles</div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+        <div class="results-eyebrow">— Los 5 Niveles de Densidad —</div>
+        <div class="cards-list" id="cards-list"></div>
+    </div>
+
+    <!-- FORMULA REFERENCE -->
+    <div class="glass formula-ref">
+        <div class="section-tag">Fórmulas de Referencia</div>
+        <div class="formula-grid">
+            <div class="formula-cell" style="--c: var(--dense)">
+                <div class="fc-name">Dense Pack</div>
+                <div class="fc-formula">Cement × 0.90</div>
+            </div>
+            <div class="formula-cell" style="--c: var(--semi-dense)">
+                <div class="fc-name">Semi-Dense</div>
+                <div class="fc-formula">Dense × 0.875</div>
+            </div>
+            <div class="formula-cell" style="--c: var(--normal)">
+                <div class="fc-name">Normal Pack</div>
+                <div class="fc-formula">Dense × 0.75</div>
+            </div>
+            <div class="formula-cell" style="--c: var(--semi-fluff)">
+                <div class="fc-name">Semi-Fluff</div>
+                <div class="fc-formula">Dense × 0.625</div>
+            </div>
+            <div class="formula-cell" style="--c: var(--fluff)">
+                <div class="fc-name">Fluff Pack</div>
+                <div class="fc-formula">Dense × 0.50</div>
+            </div>
+            <div class="formula-cell">
+                <div class="fc-name">Micro (±)</div>
+                <div class="fc-formula" style="color: var(--text-mid); font-size:12px;">Light −1g · Heavy +1g<br>Plus → próx. nivel</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="howto">
+        <h2>Cómo Aplicarlo en Casa</h2>
+        <p class="howto-sub">Cuatro pasos. Una báscula. Resultados perfectos.</p>
+        <div class="steps">
+            <div class="glass step">
+                <div class="step-num">01</div>
+                <div class="step-title">Consigue una báscula de precisión</div>
+                <p class="step-body">Que mida en gramos y décimas. La precisión milimétrica es el núcleo de esta escala.</p>
+            </div>
+            <div class="glass step">
+                <div class="step-num">02</div>
+                <div class="step-title">Mide tu Cement Pack</div>
+                <p class="step-body">Llena la cazoleta y aplasta el tabaco hasta que esté duro como una roca. Pesa y apunta ese número.</p>
+            </div>
+            <div class="glass step">
+                <div class="step-num">03</div>
+                <div class="step-title">Introduce aquí tu Cement Pack</div>
+                <p class="step-body">La calculadora obtiene el gramaje exacto para cada nivel. Guarda tu número mágico de Dense Pack.</p>
+            </div>
+            <div class="glass step">
+                <div class="step-num">04</div>
+                <div class="step-title">Elige el nivel según la marca</div>
+                <p class="step-body">Cada nivel señala qué marcas rinden mejor en esa densidad. Multiplica y pesa. Sin suposiciones.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">Hookah UNLTD</div>
+        <div class="footer-copy">Desarrollado por Sarkis Alexander &mdash; La Escala de Densidad de Sarkis &copy; 2025</div>
+    </footer>
+</div>
+
+<script>
+// ── CANVAS EMBERS ──────────────────────────────────────────────────────────
+const CV = document.getElementById('canvas-bg');
+const CX = CV.getContext('2d');
+let W, H;
+
+function resize() {
+    W = CV.width = window.innerWidth;
+    H = CV.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = [
+    [200, 147, 42],
+    [224, 85, 0],
+    [237, 180, 60],
+    [200, 100, 20],
+];
+
+class Ember {
+    constructor(init) {
+        this.reset(init);
+    }
+    reset(scatter) {
+        this.x = Math.random() * W;
+        this.y = scatter ? Math.random() * H : H + 10;
+        this.r = Math.random() * 1.8 + 0.4;
+        this.vy = -(Math.random() * 0.35 + 0.08);
+        this.vx = (Math.random() - 0.5) * 0.22;
+        this.alpha = 0;
+        this.maxAlpha = Math.random() * 0.28 + 0.06;
+        this.fadeIn = true;
+        this.fadeRate = Math.random() * 0.0007 + 0.0003;
+        this.wobble = Math.random() * 0.015;
+        this.wobbleOff = Math.random() * Math.PI * 2;
+        this.age = 0;
+        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        this.r1 = c[0]; this.g1 = c[1]; this.b1 = c[2];
+    }
+    tick() {
+        this.age++;
+        this.y += this.vy;
+        this.x += this.vx + Math.sin(this.age * this.wobble + this.wobbleOff) * 0.08;
+        if (this.fadeIn) {
+            this.alpha += 0.004;
+            if (this.alpha >= this.maxAlpha) this.fadeIn = false;
+        } else {
+            this.alpha -= this.fadeRate;
+        }
+        if (this.alpha <= 0 || this.y < -10) this.reset(false);
+    }
+    draw() {
+        CX.beginPath();
+        CX.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        CX.fillStyle = `rgba(${this.r1},${this.g1},${this.b1},${Math.max(0, this.alpha)})`;
+        CX.fill();
+    }
+}
+
+const embers = Array.from({length: 90}, (_, i) => new Ember(true));
+
+(function loop() {
+    CX.clearRect(0, 0, W, H);
+    embers.forEach(e => { e.tick(); e.draw(); });
+    requestAnimationFrame(loop);
+})();
+
+// ── SLIDER / INPUT SYNC ───────────────────────────────────────────────────
+const slider = document.getElementById('slider');
+const numbox = document.getElementById('numbox');
+
+function syncSlider() {
+    const min = +slider.min, max = +slider.max, v = +slider.value;
+    const pct = ((v - min) / (max - min) * 100).toFixed(2) + '%';
+    slider.style.setProperty('--pct', pct);
+}
+
+slider.addEventListener('input', () => {
+    numbox.value = slider.value;
+    syncSlider();
+    calculate();
+});
+
+numbox.addEventListener('input', () => {
+    const v = parseFloat(numbox.value);
+    if (!isNaN(v) && v >= 5 && v <= 60) {
+        slider.value = v;
+        syncSlider();
+        calculate();
+    }
+});
+
+syncSlider();
+
+// ── DATA ──────────────────────────────────────────────────────────────────
+const LEVELS = [
+    {
+        key: 'dense',
+        name: 'Dense Pack',
+        pct: 1.0,
+        badge: '100% del Dense Pack',
+        color: 'var(--dense)',
+        rgb: 'var(--dense-rgb)',
+        desc: 'Tabaco altamente comprimido. Casi sin espacio para el aire, combustión lenta de jugos y hojas. Ideal para tabacos negros con alto contenido de nicotina que requieren calentamiento lento.',
+        brands: ['Tangiers', 'Zomo Strong', 'KFC (Kashmir)', 'Lavoo Heritage', 'Serpent'],
+        micro: true,
+    },
+    {
+        key: 'semi-dense',
+        name: 'Semi-Dense Pack',
+        pct: 0.875,
+        badge: '87.5% del Dense Pack',
+        color: 'var(--semi-dense)',
+        rgb: 'var(--semi-dense-rgb)',
+        desc: 'Bastante comprimido, limitando el flujo de aire. Fumada densa y prolongada, soporta más calor que el Normal.',
+        brands: ['Darkside', 'Trifecta Dark', 'Zomo Blonde', 'Nakhla', 'Must Have', 'Black Lava'],
+        micro: true,
+    },
+    {
+        key: 'normal',
+        name: 'Normal Pack',
+        pct: 0.75,
+        badge: '75% del Dense Pack',
+        color: 'var(--normal)',
+        rgb: 'var(--normal-rgb)',
+        desc: 'El punto intermedio exacto. Se presiona ligeramente para dar estructura, sin apelmazarlo. El más versátil de la escala.',
+        brands: ['Al Fakher', 'Azure Blonde', 'Adalya', 'Haze', 'Element Air', 'Overdozz', 'Hookafina'],
+        micro: true,
+    },
+    {
+        key: 'semi-fluff',
+        name: 'Semi-Fluff Pack',
+        pct: 0.625,
+        badge: '62.5% del Dense Pack',
+        color: 'var(--semi-fluff)',
+        rgb: 'var(--semi-fluff-rgb)',
+        desc: 'Ligeramente más estructurado que el Fluff, con excelente circulación de aire. Para tabacos rubios que soportan un poco más de calor.',
+        brands: ['Tabacos rubios ligeros', 'Variedades americanas ligeras'],
+        micro: false,
+    },
+    {
+        key: 'fluff',
+        name: 'Fluff Pack',
+        pct: 0.5,
+        badge: '50% del Dense Pack',
+        color: 'var(--fluff)',
+        rgb: 'var(--fluff-rgb)',
+        desc: 'El tabaco se deja caer libremente. Máximo flujo de aire y calor, mínima compresión. Ocupa todo el volumen con la mitad del peso de un Dense Pack.',
+        brands: ['Social Smoke', 'Chaos', 'Tabacos alemanes tradicionales'],
+        micro: false,
+    },
+];
+
+function nextWeight(dense, pct, cement) {
+    const order = [0.5, 0.625, 0.75, 0.875, 1.0];
+    const idx = order.indexOf(pct);
+    if (idx === -1) return dense;
+    if (idx < order.length - 1) return dense * order[idx + 1];
+    return cement; // dense -> cement
+}
+
+// ── CALCULATE ─────────────────────────────────────────────────────────────
+function calculate() {
+    const cement = Math.max(5, Math.min(60, parseFloat(numbox.value) || 22));
+    const dense = cement * 0.9;
+
+    // Base banner
+    const banner = document.getElementById('base-banner');
+    document.getElementById('base-num').innerHTML = `${dense.toFixed(1)}<sup>g</sup>`;
+    banner.classList.add('on');
+
+    // Results container
+    const results = document.getElementById('results');
+    results.classList.add('on');
+
+    const list = document.getElementById('cards-list');
+    list.innerHTML = '';
+
+    LEVELS.forEach((lvl, i) => {
+        const w = dense * lvl.pct;
+        const nw = nextWeight(dense, lvl.pct, cement);
+
+        let microsHTML = '';
+        if (lvl.micro) {
+            const light = (w - 1).toFixed(1);
+            const heavy = (w + 1).toFixed(1);
+            const plus  = ((w + nw) / 2).toFixed(1);
+            microsHTML = `
+                <div class="micros">
+                    <div class="micros-label">Micro-Variaciones</div>
+                    <div class="micros-row">
+                        <div class="micro">
+                            <div class="micro-n">Light</div>
+                            <div class="micro-v">${light}<small>g</small></div>
+                        </div>
+                        <div class="micro">
+                            <div class="micro-n">Standard</div>
+                            <div class="micro-v">${w.toFixed(1)}<small>g</small></div>
+                        </div>
+                        <div class="micro">
+                            <div class="micro-n">Plus</div>
+                            <div class="micro-v">${plus}<small>g</small></div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        const chips = lvl.brands.map(b => `<span class="chip">${b}</span>`).join('');
+
+        const card = document.createElement('div');
+        card.className = 'glass pack-card';
+        card.style.cssText = `--c:${lvl.color};--c-rgb:${lvl.rgb};`;
+        card.innerHTML = `
+            <div class="card-shine"></div>
+            <div class="card-top">
+                <div class="card-name">${lvl.name}</div>
+                <div class="card-badge">${lvl.badge}</div>
+            </div>
+            <div class="card-weight">${w.toFixed(1)}<sup>g</sup></div>
+            <div class="card-desc">${lvl.desc}</div>
+            <div class="bar-wrap">
+                <div class="bar-meta">
+                    <span>Densidad relativa al Cement Pack</span>
+                    <span>${Math.round(lvl.pct * 90)}%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-w="${(lvl.pct * 90).toFixed(1)}"></div>
+                </div>
+            </div>
+            <div class="chips">${chips}</div>
+            ${microsHTML}
+        `;
+        list.appendChild(card);
+
+        setTimeout(() => {
+            card.classList.add('show');
+            setTimeout(() => {
+                card.querySelector('.bar-fill').style.width = card.querySelector('.bar-fill').dataset.w + '%';
+            }, 120);
+        }, i * 75);
+    });
+}
+
+// Auto-calculate on load
+calculate();
+</script>
+</body>
+</html>
