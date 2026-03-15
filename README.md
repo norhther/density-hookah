@@ -49,4 +49,4 @@ Abre `index.html` en tu navegador — no requiere servidor ni dependencias exter
 ## Créditos
 
 Fórmula y metodología: **Sarkis Alexander — Hookah UNLTD**
-Implementación web: generada para uso libre de la comunidad hookah.
+Implementación web: **norhther**
