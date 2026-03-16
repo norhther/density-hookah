@@ -509,6 +509,118 @@
         .step-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; margin-bottom: 8px; }
         .step-body { font-size: 14.5px; color: var(--text-mid); line-height: 1.6; }
 
+        /* ── BOWL PRINCIPLES ── */
+        .bowl-principles { margin: 60px 0 52px; }
+        .bowl-principles h2 {
+            font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px);
+            font-weight: 600; text-align: center; letter-spacing: 0.05em; margin-bottom: 8px;
+        }
+        .bowl-principles-sub {
+            text-align: center; font-style: italic; font-size: 17px;
+            color: var(--text-mid); margin-bottom: 34px;
+        }
+
+        .bowl-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .bowl-col {
+            padding: 28px 26px;
+        }
+
+        .bowl-col-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+            color: var(--gold); display: flex; align-items: center;
+            gap: 12px; margin-bottom: 16px;
+        }
+        .bowl-col-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .bowl-col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 18px; font-weight: 600;
+            letter-spacing: 0.04em; margin-bottom: 12px;
+        }
+
+        .bowl-col.traditional .bowl-col-title { color: var(--semi-dense); }
+        .bowl-col.phunnel .bowl-col-title { color: var(--semi-fluff); }
+
+        .bowl-col p {
+            font-size: 15px; color: var(--text-mid);
+            line-height: 1.65; margin-bottom: 12px;
+        }
+
+        .bowl-col ul {
+            list-style: none; padding: 0; margin: 0 0 12px;
+        }
+
+        .bowl-col ul li {
+            font-size: 15px; color: var(--text-mid);
+            line-height: 1.65; padding-left: 18px; position: relative;
+            margin-bottom: 6px;
+        }
+
+        .bowl-col ul li::before {
+            content: '—'; position: absolute; left: 0;
+            color: var(--gold-dim);
+        }
+
+        .bowl-img-ref {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'DM Mono', monospace; font-size: 10px;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-low);
+            border: 1px solid var(--border);
+            padding: 5px 12px; margin-top: 8px;
+            text-decoration: none; transition: color 0.2s, border-color 0.2s;
+        }
+        .bowl-img-ref:hover { color: var(--gold); border-color: var(--border-strong); }
+        .bowl-img-ref svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+        .bowl-principles-body { padding: 28px 32px; margin-bottom: 14px; }
+        .bowl-principles-body .section-tag { margin-bottom: 18px; }
+
+        .bowl-principles-body p {
+            font-size: 15.5px; color: var(--text-mid);
+            line-height: 1.7; margin-bottom: 14px;
+        }
+
+        .bowl-principles-body p:last-child { margin-bottom: 0; }
+
+        .bowl-principles-body ul {
+            list-style: none; padding: 0;
+            margin: 0 0 14px 0;
+        }
+
+        .bowl-principles-body ul li {
+            font-size: 15.5px; color: var(--text-mid);
+            line-height: 1.65; padding-left: 22px;
+            position: relative; margin-bottom: 7px;
+        }
+
+        .bowl-principles-body ul li::before {
+            content: '—'; position: absolute; left: 0;
+            color: var(--gold-dim); font-family: 'DM Mono', monospace;
+        }
+
+        .bowl-highlight {
+            border-left: 2px solid var(--gold-dim);
+            padding: 14px 20px;
+            background: rgba(200,147,42,0.04);
+            font-style: italic;
+            font-size: 15.5px; color: var(--text-mid);
+            line-height: 1.7; margin: 18px 0;
+        }
+
+        @media (max-width: 640px) {
+            .bowl-compare { grid-template-columns: 1fr; }
+            .bowl-principles-body { padding: 22px 18px; }
+            .bowl-col { padding: 22px 18px; }
+        }
+
         /* ── FOOTER ── */
         footer { border-top: 1px solid var(--border); padding: 36px 0 56px; text-align: center; }
         .footer-logo {
@@ -669,6 +781,47 @@
         <div class="steps" id="steps-list"></div>
     </div>
 
+    <!-- BOWL HEATING PRINCIPLES -->
+    <div class="bowl-principles">
+        <h2 data-i18n="bowlH2"></h2>
+        <p class="bowl-principles-sub" data-i18n="bowlSub"></p>
+
+        <div class="bowl-compare">
+            <div class="glass bowl-col traditional">
+                <div class="bowl-col-tag" data-i18n="bowlTraditionalTag"></div>
+                <div class="bowl-col-title" data-i18n="bowlTraditionalTitle"></div>
+                <p data-i18n="bowlTraditionalDesc1"></p>
+                <p data-i18n="bowlTraditionalDesc2"></p>
+                <p data-i18n="bowlTraditionalDesc3"></p>
+            </div>
+            <div class="glass bowl-col phunnel">
+                <div class="bowl-col-tag" data-i18n="bowlPhunnelTag"></div>
+                <div class="bowl-col-title" data-i18n="bowlPhunnelTitle"></div>
+                <p data-i18n="bowlPhunnelDesc1"></p>
+                <p data-i18n="bowlPhunnelDesc2"></p>
+                <a class="bowl-img-ref" href="https://imgur.com/oJIN7mh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="10" height="10" rx="1"/><path d="M1 8l3-3 2 2 2-2.5 3 3.5"/><circle cx="8.5" cy="3.5" r="1"/></svg>
+                    <span data-i18n="bowlImgRef"></span>
+                </a>
+                <p style="margin-top:12px" data-i18n="bowlPhunnelDesc3"></p>
+            </div>
+        </div>
+
+        <div class="glass bowl-principles-body">
+            <div class="section-tag" data-i18n="bowlPrinciplesTag"></div>
+            <p data-i18n="bowlBodyIntro"></p>
+            <p data-i18n="bowlBodySession"></p>
+            <ul id="bowl-session-list"></ul>
+            <p data-i18n="bowlBodyPhunnelProblem"></p>
+            <div class="bowl-highlight" data-i18n="bowlHighlight"></div>
+            <p data-i18n="bowlBodyPhunnelCooking"></p>
+            <p data-i18n="bowlBodyTraditional"></p>
+            <p data-i18n="bowlBodyModern"></p>
+            <p data-i18n="bowlBodySummary"></p>
+            <p data-i18n="bowlBodyConclusion"></p>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-logo">norhther</div>
         <div class="footer-copy" data-i18n="footerCopy"></div>
@@ -711,6 +864,33 @@ const STRINGS = {
             { title: 'Elige el nivel según la marca', body: 'Cada nivel señala qué marcas rinden mejor en esa densidad. Multiplica y pesa. Sin suposiciones.' },
         ],
         footerCopy: 'Web por norhther — Ciencia y metodología por Sarkis Alexander (Hookah UNLTD) © 2025',
+        bowlH2: 'Cazoleta Tradicional vs Phunnel',
+        bowlSub: 'Principios de calentamiento diferentes para resultados diferentes.',
+        bowlTraditionalTag: 'Cazoleta Tradicional',
+        bowlTraditionalTitle: 'Calentamiento Activo',
+        bowlTraditionalDesc1: 'En la cazoleta tradicional, el calentamiento pasivo desempeña un papel menor y el calentamiento activo desempeña un papel fundamental en el momento del paso del aire caliente a través de toda la capa de tabaco.',
+        bowlTraditionalDesc2: 'Con este tipo de cazoleta, extraes el sabor de toda la capa de tabaco, de arriba abajo por completo.',
+        bowlTraditionalDesc3: 'A las cazoletas tradicionales les gusta el tabaco seco, como el Al Fakher. Agregar más tabaco no es un problema. Obtienes el extracto principal en el momento del paso del aire caliente a través de la capa profunda de tabaco.',
+        bowlPhunnelTag: 'Cazoleta Phunnel',
+        bowlPhunnelTitle: 'Calentamiento Pasivo',
+        bowlPhunnelDesc1: 'En la cazoleta phunnel, el calentamiento pasivo lento, de amplia superficie y uniforme es el protagonista. El aire caliente activo al llegar a través de la capa no tiene un gran impacto, porque incluso con el método overpack, el aire caliente atraviesa la capa de tabaco MUY MAL.',
+        bowlPhunnelDesc2: 'La capa inferior del tabaco sigue calentándose de forma insuficiente. Por ello, las cazoletas phunnel son más adecuadas para tabacos muy húmedos, donde la glicerina ayuda a transferir el calor hacia el fondo de la capa.',
+        bowlImgRef: 'Imagen de referencia: penetración del aire',
+        bowlPhunnelDesc3: 'Las cazoletas phunnel se crearon principalmente para que los tabacos modernos muy húmedos (sobrecargados de glicerina) no se filtraran al agua del jarrón durante la sesión, y para que el componente líquido (glicerina + aroma + colorante) permaneciera en la capa de tabaco.',
+        bowlPrinciplesTag: 'Principios en Profundidad',
+        bowlBodyIntro: 'Estos son principios de cazoleta completamente diferentes. Para una sesión de larga duración, en el caso de una cazoleta phunnel necesitas: más volumen de tabaco y bajar la temperatura en la capa de tabaco.',
+        bowlBodySession: 'Sin embargo, en el caso de los tipos phunnel de cazoletas, esto es una solución problemática. Si reduces el calor de la fuente de calor (control HMD, número de piezas de carbón, tamaño de las piezas de carbón, etc.), entonces la temperatura no llegará al fondo de la capa rellena en esta cazoleta phunnel. Al finalizar la sesión de cachimba, el fondo de la capa de tabaco estará crudo, húmedo y sin consumir. Por tanto, en el caso de una cazoleta phunnel, también depende de la profundidad de la cazoleta y del tipo de tabaco que uses.',
+        bowlSessionList: [
+            'Más volumen de tabaco',
+            'Bajar la temperatura en la capa de tabaco',
+        ],
+        bowlBodyPhunnelProblem: 'Por ello, en el caso de la cazoleta phunnel, también depende de lo profunda que sea la cazoleta y de qué tipo de tabaco uses. Los tabacos húmedos son más ventajosos. Las cazoletas phunnel están diseñadas principalmente para tipos de tabaco de cachimba húmedos, para que el componente líquido (glicerina + aroma + colorante) no fluya hacia el agua del jarrón durante la sesión.',
+        bowlHighlight: 'Al mismo tiempo, el componente líquido en el tabaco, si es abundante, puede transferir calor. Esto se utiliza en las cazoletas phunnel. Es básicamente el principio de «cocinar»: toda la capa de tabaco se calienta «cocinando» el componente líquido presente en el tabaco, si lo hay en gran cantidad.',
+        bowlBodyPhunnelCooking: 'Como resultado, también obtienes un exceso de densas nubes blancas y aroma. Sin embargo, el sabor de la hoja de tabaco desaparece.',
+        bowlBodyTraditional: 'En el caso de los tipos de cazoletas tradicionales, todo es mejor, más tradicional. A las cazoletas tradicionales les gustan los tipos de tabaco de cachimba secos (como el Al Fakher). Agregar más tabaco a una cazoleta tradicional no supone ningún problema. Ni siquiera tienes que regular ni cambiar la temperatura de la fuente de calor en el caso de una cazoleta tradicional. Obtienes el extracto principal de la capa de tabaco en el momento del paso del aire caliente, a través de la capa de tabaco profunda. Pero, por supuesto, el calentamiento pasivo (temperatura de la fuente de calor) en la capa de tabaco también desempeña su papel.',
+        bowlBodyModern: 'Desafortunadamente, las cazoletas phunnel representan una forma moderna de fumar. Fumas principalmente glicerina y sustancias aromáticas. A la gente le gustan las nubes blancas, densas y bonitas, incluso con sustancias aromáticas. Hoy en día, a la gente le gusta menos la hoja de tabaco de calidad y su sabor (lo cual es un privilegio más propio de los tipos tradicionales de cazoletas de cachimba).',
+        bowlBodySummary: 'En resumen: si quieres una sesión de cachimba de larga duración, debes usar un gran volumen de tabaco. Debes calentarlo de manera uniforme en toda la capa (esto se aplica siempre y en todas partes). Y dado que hay un gran volumen de tabaco, debes bajar ligeramente la temperatura de la capa de tabaco en comparación con la que usas habitualmente.',
+        bowlBodyConclusion: 'Sin embargo, como ya escribí, esto es difícil de conseguir con cazoletas phunnel. El problema son las cazoletas phunnel muy profundas y el tipo de tabaco seco en la cazoleta. No obstante, puedes probar el método de llenar el tabaco de forma semidensa o densa, incluido el overpacking (1-2 mm por encima del nivel de la cazoleta), aunque el tabaco luego se pegue al papel de aluminio o al HMD. Y usa tabacos de cachimba más húmedos (que son casi todos los tabacos modernos de cachimba que se venden hoy en día). Simplemente depende de muchos factores.',
         levels: [
             { badge: '100% del Dense Pack', desc: 'Tabaco altamente comprimido. Casi sin espacio para el aire, combustión lenta de jugos y hojas. Ideal para tabacos negros con alto contenido de nicotina que requieren calentamiento lento.' },
             { badge: '87.5% del Dense Pack', desc: 'Bastante comprimido, limitando el flujo de aire. Fumada densa y prolongada, soporta más calor que el Normal.' },
@@ -752,6 +932,33 @@ const STRINGS = {
             { title: 'Choose the level for your brand', body: 'Each level shows which brands perform best at that density. Multiply and weigh. No guessing.' },
         ],
         footerCopy: 'Web by norhther — Science and methodology by Sarkis Alexander (Hookah UNLTD) © 2025',
+        bowlH2: 'Traditional vs Phunnel Bowl',
+        bowlSub: 'Different heating principles for different results.',
+        bowlTraditionalTag: 'Traditional Bowl',
+        bowlTraditionalTitle: 'Active Heating',
+        bowlTraditionalDesc1: 'In the case of a traditional bowl, passive heating plays a small role and active heating plays a major role at the moment of passage of hot air through the entire tobacco layer.',
+        bowlTraditionalDesc2: 'With this type of bowl, you get the flavor from the entire tobacco layer, completely from top to bottom.',
+        bowlTraditionalDesc3: 'Traditional bowls like dry types of hookah tobacco, such as Al Fakher. Adding more tobacco is no problem. You get the main extract from the tobacco layer at the moment of passage of hot air through the deep layer.',
+        bowlPhunnelTag: 'Phunnel Bowl',
+        bowlPhunnelTitle: 'Passive Heating',
+        bowlPhunnelDesc1: 'In the case of a phunnel bowl, slow, wide-surface, even, passive heating plays a major role. Active hot air at the moment of arrival through the layer does not have a big impact, because even with the overpack method, the hot air still penetrates through the tobacco layer VERY BADLY.',
+        bowlPhunnelDesc2: 'The bottom layer of tobacco is still insufficiently heated. Therefore, phunnel bowls are more suitable for very moist tobaccos, where glycerin helps to transfer heat to the bottom of the tobacco layer.',
+        bowlImgRef: 'Reference image: air penetration',
+        bowlPhunnelDesc3: 'Phunnel bowls were created mainly so that today\'s very moist tobaccos (overfilled with glycerin) would not leak out into the water in the vase during smoking, and so that the liquid component (glycerin + flavor + dye) would remain in the tobacco layer.',
+        bowlPrinciplesTag: 'Principles In Depth',
+        bowlBodyIntro: 'These are completely different principles of bowls. For a long-lasting session, in the case of a phunnel bowl you need: more tobacco volume and lower the temperature in the tobacco layer.',
+        bowlBodySession: 'However, in the case of phunnel types of bowls, this is a problematic solution. If you reduce the heat of the heat source (HMD control, number of pieces of coal, size of pieces of coal, etc.), then the temperature will not reach the bottom of the filled layer in this phunnel bowl. After the hookah session is over, the bottom of the tobacco layer will be raw, moist and unconsumed. Therefore, in the case of a phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use.',
+        bowlSessionList: [
+            'More tobacco volume',
+            'Lower the temperature in the tobacco layer',
+        ],
+        bowlBodyPhunnelProblem: 'Therefore, in the case of the phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use. Moist tobaccos are more advantageous. Phunnel bowls are designed mainly for moist types of hookah tobaccos, so that the liquid component (glycerin + aroma + dye) does not flow out into the water in the vase during smoking.',
+        bowlHighlight: 'At the same time, the liquid component in the tobacco, if there is a lot of it, can transfer heat. This is used in phunnel bowls. It is basically the principle of "cooking" — the entire tobacco layer is heated by "cooking" the liquid component present in the tobacco, if there is a lot of it.',
+        bowlBodyPhunnelCooking: 'As a result, you also get an excess of thick white clouds and aroma. However, the taste of the tobacco leaf disappears.',
+        bowlBodyTraditional: 'In the case of traditional types of bowls, everything is better — more traditional. Traditional types of bowls like dry types of hookah tobacco (such as Al Fakher). Adding more tobacco to a traditional type of bowl is no problem. You don\'t even have to regulate and change the temperature of the heat source in the case of a traditional bowl. You get the main extract from the tobacco layer at the moment of passage of hot air, through the deep tobacco layer. But of course, passive heating (temperature of the heat source) in the tobacco layer also plays its role.',
+        bowlBodyModern: 'Unfortunately, phunnel bowls represent a modern way of smoking. You smoke mostly glycerin and aromatic substances. People like nice, thick, white clouds, even with aromatic substances. People today like quality tobacco leaf and its taste less — which is a privilege rather for traditional types of hookah bowls.',
+        bowlBodySummary: 'To sum it up: if you want a long-lasting hookah session, you have to use a large volume of tobacco. You have to heat it evenly over the entire layer (this applies always and everywhere). And since there is a large volume of tobacco, you have to slightly lower the temperature of the tobacco layer than you usually use.',
+        bowlBodyConclusion: 'However, as noted — this is difficult to achieve with phunnel bowls. The problem is the very deep phunnel bowls and the type of dry tobacco in the bowl. However, you can try the method of filling tobacco semi-dense or dense, including overpacking (1–2 mm above the bowl level) — even if the tobacco then bakes to the foil or HMD. Use wetter hookah tobaccos (which are almost all modern hookah tobaccos sold today). It simply depends on many factors.',
         levels: [
             { badge: '100% of Dense Pack', desc: 'Highly compressed tobacco. Almost no airflow, slow combustion. Ideal for dark tobacco with high nicotine content that requires slow heating.' },
             { badge: '87.5% of Dense Pack', desc: 'Quite compressed, limiting airflow. Dense and prolonged session, supports more heat than Normal.' },
@@ -872,6 +1079,12 @@ function applyLang() {
             <div class="step-title">${s.title}</div>
             <p class="step-body">${s.body}</p>
         </div>`).join('');
+
+    // Bowl session list (static strings, safe to use innerHTML)
+    const bowlList = document.getElementById('bowl-session-list');
+    if (bowlList && S.bowlSessionList) {
+        bowlList.innerHTML = S.bowlSessionList.map(item => `<li>${item}</li>`).join('');
+    }
 
     // Toolbar active states
     document.getElementById('tb-es').classList.toggle('active', lang === 'es');
