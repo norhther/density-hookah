@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
-        /* ── DARK THEME (default) ── */
+
+/* ══════════════════════ THEME: DARK (default) ══════════════════════ */
         :root {
             --void: #060407;
             --deep: #0c0910;
@@ -39,7 +40,7 @@
             --dense: #ef4444;      --dense-rgb: 239, 68, 68;
         }
 
-        /* ── LIGHT THEME ── */
+/* ══════════════════════ THEME: LIGHT ══════════════════════ */
         [data-theme="light"] {
             --void: #f4ede0;
             --deep: #ede4d3;
@@ -82,6 +83,7 @@
 
         [data-theme="light"] #canvas-bg { opacity: var(--canvas-opacity); }
 
+/* ══════════════════════ BASE RESET & GLOBALS ══════════════════════ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
@@ -94,7 +96,7 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* ── BACKGROUND ── */
+/* ══════════════════════ CSS: BACKGROUND ══════════════════════ */
         #canvas-bg {
             position: fixed; inset: 0; z-index: 0;
             pointer-events: none;
@@ -111,7 +113,7 @@
             transition: background 0.4s;
         }
 
-        /* ── TOOLBAR ── */
+/* ══════════════════════ CSS: TOOLBAR ══════════════════════ */
         .toolbar {
             position: fixed;
             top: 14px; right: 18px;
@@ -168,14 +170,14 @@
             margin-right: 3px;
         }
 
-        /* ── LAYOUT ── */
+/* ══════════════════════ CSS: LAYOUT ══════════════════════ */
         .wrap {
             position: relative; z-index: 2;
             max-width: 920px; margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* ── HEADER ── */
+/* ══════════════════════ CSS: HEADER ══════════════════════ */
         header { padding: 72px 0 48px; text-align: center; }
 
         .byline {
@@ -215,7 +217,33 @@
             margin: 36px auto;
         }
 
-        /* ── GLASS CARD ── */
+        /* Section jump links (table of contents) */
+        .toc-nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin: 0 0 32px;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .toc-link {
+            color: var(--text-low);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .toc-link:hover {
+            color: var(--gold);
+            border-color: var(--gold-dim);
+        }
+
+/* ══════════════════════ CSS: GLASS CARD ══════════════════════ */
         .glass {
             background: var(--surface);
             backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
@@ -230,7 +258,7 @@
             pointer-events: none;
         }
 
-        /* ── CALCULATOR CARD ── */
+/* ══════════════════════ CSS: CALCULATOR CARD ══════════════════════ */
         .calc-card { padding: 40px 44px; margin-bottom: 18px; }
 
         .section-tag {
@@ -244,6 +272,7 @@
         .input-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 8px;
+            display: block;
         }
 
         .input-note {
@@ -257,7 +286,7 @@
         input[type="range"] {
             -webkit-appearance: none; appearance: none;
             width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--gold) var(--pct, 24.5%), var(--slider-track) var(--pct, 24.5%));
+            background: linear-gradient(90deg, var(--gold) var(--pct, 18.2%), var(--slider-track) var(--pct, 18.2%));
             outline: none; border-radius: 2px; cursor: pointer;
         }
 
@@ -320,7 +349,7 @@
         .calc-btn:hover::after { opacity: 1; }
         .calc-btn:active { transform: translateY(0); }
 
-        /* ── DENSE BASE BANNER ── */
+/* ══════════════════════ CSS: DENSE BASE BANNER ══════════════════════ */
         .base-banner {
             display: none; background: rgba(200,147,42,0.055);
             border: 1px solid var(--border-strong);
@@ -342,7 +371,7 @@
         .base-banner-num sup { font-size: 20px; opacity: 0.6; letter-spacing: 0; font-weight: 300; }
         .base-banner-sub { font-style: italic; font-size: 14px; color: var(--text-low); margin-top: 5px; }
 
-        /* ── RESULTS ── */
+/* ══════════════════════ CSS: RESULTS ══════════════════════ */
         #results { display: none; }
         #results.on { display: block; }
 
@@ -357,10 +386,10 @@
             color: var(--text-low); flex: 1; text-align: center;
         }
 
-        /* ── CARDS LIST ── */
+/* ══════════════════════ CSS: CARDS LIST ══════════════════════ */
         .cards-list { display: flex; flex-direction: column; gap: 11px; }
 
-        /* COMPACT MODE */
+        /* Compact mode */
         .cards-list.compact {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -373,7 +402,7 @@
         .cards-list.compact .card-weight { font-size: 36px; margin: 4px 0 8px; }
         .cards-list.compact .chips { margin-top: 8px; }
 
-        /* ── PACK CARD ── */
+/* ══════════════════════ CSS: PACK CARD ══════════════════════ */
         .pack-card {
             border-left: 3px solid var(--c, var(--gold));
             padding: 26px 30px 22px;
@@ -421,7 +450,7 @@
             line-height: 1.55; margin-bottom: 14px;
         }
 
-        /* Bar */
+        /* Progress bar */
         .bar-wrap { margin: 12px 0 14px; }
         .bar-meta {
             display: flex; justify-content: space-between;
@@ -439,7 +468,7 @@
             transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* Chips */
+        /* Chips (brand tags) */
         .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
         .chip {
             font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.5px;
@@ -473,7 +502,7 @@
         }
         .micro-v small { font-size: 11px; opacity: 0.55; }
 
-        /* ── FORMULA REF ── */
+/* ══════════════════════ CSS: FORMULA REFERENCE ══════════════════════ */
         .formula-ref { margin: 0 0 52px; padding: 32px 36px; }
         .formula-ref .section-tag { margin-bottom: 20px; }
         .formula-grid {
@@ -490,7 +519,7 @@
         }
         .fc-formula { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--c, var(--gold)); }
 
-        /* ── HOW TO ── */
+/* ══════════════════════ CSS: HOW TO STEPS ══════════════════════ */
         .howto { margin: 60px 0 52px; }
         .howto h2 {
             font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px);
@@ -509,7 +538,7 @@
         .step-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; margin-bottom: 8px; }
         .step-body { font-size: 14.5px; color: var(--text-mid); line-height: 1.6; }
 
-        /* ── BOWL PRINCIPLES ── */
+/* ══════════════════════ CSS: BOWL PRINCIPLES ══════════════════════ */
         .bowl-principles { margin: 60px 0 52px; }
         .bowl-principles h2 {
             font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px);
@@ -615,13 +644,7 @@
             line-height: 1.7; margin: 18px 0;
         }
 
-        @media (max-width: 640px) {
-            .bowl-compare { grid-template-columns: 1fr; }
-            .bowl-principles-body { padding: 22px 18px; }
-            .bowl-col { padding: 22px 18px; }
-        }
-
-        /* ── FOOTER ── */
+/* ══════════════════════ CSS: FOOTER ══════════════════════ */
         footer { border-top: 1px solid var(--border); padding: 36px 0 56px; text-align: center; }
         .footer-logo {
             font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 5px;
@@ -629,13 +652,13 @@
         }
         .footer-copy { font-style: italic; font-size: 13px; color: var(--text-low); }
 
-        /* ── ANIMATIONS ── */
+/* ══════════════════════ CSS: ANIMATIONS ══════════════════════ */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── RESPONSIVE ── */
+/* ══════════════════════ CSS: RESPONSIVE ══════════════════════ */
         @media (max-width: 640px) {
             .toolbar { top: auto; bottom: 14px; right: 50%; transform: translateX(50%); }
             .tb-btn svg + span { display: none; }
@@ -650,6 +673,9 @@
             .formula-ref { padding: 24px 18px; }
             header { padding: 48px 0 36px; }
             .cards-list.compact { grid-template-columns: 1fr 1fr; }
+            .bowl-compare { grid-template-columns: 1fr; }
+            .bowl-principles-body { padding: 22px 18px; }
+            .bowl-col { padding: 22px 18px; }
         }
         @media (max-width: 400px) {
             .cards-list.compact { grid-template-columns: 1fr; }
@@ -661,34 +687,34 @@
 <canvas id="canvas-bg"></canvas>
 <div class="ambient"></div>
 
-<!-- TOOLBAR -->
-<div class="toolbar" id="toolbar">
-    <!-- Language -->
-    <div class="tb-group">
-        <button class="tb-btn active" id="tb-es" onclick="setLang('es')">ES</button>
-        <button class="tb-btn" id="tb-en" onclick="setLang('en')">EN</button>
+<!-- ══════════════════════ TOOLBAR ══════════════════════ -->
+<div class="toolbar" id="toolbar" role="toolbar" aria-label="Opciones de visualización">
+    <!-- Language switch (first) -->
+    <div class="tb-group" role="group" aria-label="Idioma">
+        <button class="tb-btn active" id="tb-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español">ES</button>
+        <button class="tb-btn" id="tb-en" onclick="setLang('en')" aria-label="Switch language to English">EN</button>
     </div>
-    <div class="tb-sep"></div>
-    <!-- View -->
-    <div class="tb-group">
-        <button class="tb-btn active" id="tb-expanded" onclick="setView('expanded')">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="3" x2="10" y2="3"/><line x1="2" y1="6" x2="10" y2="6"/><line x1="2" y1="9" x2="10" y2="9"/></svg>
+    <div class="tb-sep" role="separator"></div>
+    <!-- Compact view toggle (second) -->
+    <div class="tb-group" role="group" aria-label="Vista">
+        <button class="tb-btn active" id="tb-expanded" onclick="setView('expanded')" aria-label="Vista expandida">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="2" y1="3" x2="10" y2="3"/><line x1="2" y1="6" x2="10" y2="6"/><line x1="2" y1="9" x2="10" y2="9"/></svg>
             <span data-i18n="viewExpanded"></span>
         </button>
-        <button class="tb-btn" id="tb-compact" onclick="setView('compact')">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="4" height="4" rx="0.5"/><rect x="7" y="1" width="4" height="4" rx="0.5"/><rect x="1" y="7" width="4" height="4" rx="0.5"/><rect x="7" y="7" width="4" height="4" rx="0.5"/></svg>
+        <button class="tb-btn" id="tb-compact" onclick="setView('compact')" aria-label="Vista compacta">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="0.5"/><rect x="7" y="1" width="4" height="4" rx="0.5"/><rect x="1" y="7" width="4" height="4" rx="0.5"/><rect x="7" y="7" width="4" height="4" rx="0.5"/></svg>
             <span data-i18n="viewCompact"></span>
         </button>
     </div>
-    <div class="tb-sep"></div>
-    <!-- Theme -->
-    <div class="tb-group">
-        <button class="tb-btn active" id="tb-dark" onclick="setTheme('dark')">
-            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 2a4 4 0 1 0 4 5.5A3 3 0 0 1 6 2z"/></svg>
+    <div class="tb-sep" role="separator"></div>
+    <!-- Theme toggle (third) -->
+    <div class="tb-group" role="group" aria-label="Tema">
+        <button class="tb-btn active" id="tb-dark" onclick="setTheme('dark')" aria-label="Tema oscuro">
+            <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 2a4 4 0 1 0 4 5.5A3 3 0 0 1 6 2z"/></svg>
             <span data-i18n="themeDark"></span>
         </button>
-        <button class="tb-btn" id="tb-light" onclick="setTheme('light')">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="6" cy="6" r="2.2"/><line x1="6" y1="0.5" x2="6" y2="2"/><line x1="6" y1="10" x2="6" y2="11.5"/><line x1="0.5" y1="6" x2="2" y2="6"/><line x1="10" y1="6" x2="11.5" y2="6"/><line x1="2" y1="2" x2="3" y2="3"/><line x1="9" y1="9" x2="10" y2="10"/><line x1="10" y1="2" x2="9" y2="3"/><line x1="3" y1="9" x2="2" y2="10"/></svg>
+        <button class="tb-btn" id="tb-light" onclick="setTheme('light')" aria-label="Tema claro">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><line x1="6" y1="0.5" x2="6" y2="2"/><line x1="6" y1="10" x2="6" y2="11.5"/><line x1="0.5" y1="6" x2="2" y2="6"/><line x1="10" y1="6" x2="11.5" y2="6"/><line x1="2" y1="2" x2="3" y2="3"/><line x1="9" y1="9" x2="10" y2="10"/><line x1="10" y1="2" x2="9" y2="3"/><line x1="3" y1="9" x2="2" y2="10"/></svg>
             <span data-i18n="themeLight"></span>
         </button>
     </div>
@@ -696,8 +722,8 @@
 
 <div class="wrap">
 
-    <!-- HEADER -->
-    <header>
+    <!-- ══════════════════════ HEADER ══════════════════════ -->
+    <header id="section-top">
         <div class="byline" data-i18n="byline"></div>
         <h1>
             <span class="eyebrow" data-i18n="eyebrow"></span>
@@ -705,47 +731,74 @@
         </h1>
         <p class="tagline" data-i18n="tagline"></p>
         <div class="hr-gold"></div>
+        <!-- Table of contents / section jump links -->
+        <nav class="toc-nav" aria-label="Secciones de la página">
+            <a class="toc-link" href="#section-calculator" data-i18n="tocCalculator"></a>
+            <a class="toc-link" href="#section-formulas" data-i18n="tocFormulas"></a>
+            <a class="toc-link" href="#section-howto" data-i18n="tocHowto"></a>
+            <a class="toc-link" href="#section-bowl" data-i18n="tocBowl"></a>
+        </nav>
     </header>
 
-    <!-- CALCULATOR -->
-    <div class="glass calc-card">
+    <!-- ══════════════════════ CALCULATOR ══════════════════════ -->
+    <div class="glass calc-card" id="section-calculator">
         <div class="section-tag" data-i18n="calcTag"></div>
         <label class="input-title" for="slider" data-i18n="inputTitle"></label>
         <p class="input-note" data-i18n="inputNote"></p>
         <div class="controls">
             <div class="slider-col">
-                <input type="range" id="slider" min="5" max="60" value="22" step="0.5">
+                <input
+                    type="range"
+                    id="slider"
+                    min="5"
+                    max="30"
+                    value="15"
+                    step="0.5"
+                    aria-label="Cement Pack en gramos"
+                    aria-valuemin="5"
+                    aria-valuemax="30"
+                >
                 <div class="slider-endpoints">
                     <span data-i18n="sliderMin"></span>
                     <span data-i18n="sliderMax"></span>
                 </div>
             </div>
             <div class="num-wrap">
-                <input type="number" id="numbox" min="5" max="60" value="22" step="0.5">
-                <span class="num-unit">g</span>
+                <input
+                    type="number"
+                    id="numbox"
+                    min="5"
+                    max="30"
+                    value="15"
+                    step="0.5"
+                    aria-label="Cement Pack en gramos"
+                >
+                <span class="num-unit" aria-hidden="true">g</span>
             </div>
         </div>
         <button class="calc-btn" onclick="calculate()" data-i18n="calcBtn"></button>
     </div>
 
-    <!-- DENSE BASE DISPLAY -->
-    <div class="base-banner" id="base-banner">
+    <!-- ══════════════════════ DENSE BASE DISPLAY ══════════════════════ -->
+    <div class="base-banner" id="base-banner" aria-live="polite">
         <div class="base-banner-label" data-i18n="bannerLabel"></div>
         <div class="base-banner-num" id="base-num">—<sup>g</sup></div>
         <div class="base-banner-sub" data-i18n="bannerSub"></div>
     </div>
 
-    <!-- RESULTS -->
-    <div id="results">
+    <!-- ══════════════════════ RESULTS ══════════════════════ -->
+    <div id="results" aria-live="polite">
         <div class="results-header">
             <div class="results-eyebrow" data-i18n="resultsEyebrow"></div>
         </div>
+        <!-- Density levels are ordered lightest (Fluff) → densest (Dense Pack) in JS LEVELS array -->
         <div class="cards-list" id="cards-list"></div>
     </div>
 
-    <!-- FORMULA REFERENCE -->
-    <div class="glass formula-ref">
+    <!-- ══════════════════════ FORMULA REFERENCE ══════════════════════ -->
+    <div class="glass formula-ref" id="section-formulas">
         <div class="section-tag" data-i18n="formulaTag"></div>
+        <!-- Formula cells: Dense Pack (heaviest) → Fluff Pack (lightest) -->
         <div class="formula-grid">
             <div class="formula-cell" style="--c: var(--dense)">
                 <div class="fc-name">Dense Pack</div>
@@ -774,15 +827,15 @@
         </div>
     </div>
 
-    <!-- HOW TO USE -->
-    <div class="howto">
+    <!-- ══════════════════════ HOW TO USE ══════════════════════ -->
+    <div class="howto" id="section-howto">
         <h2 data-i18n="howtoH2"></h2>
         <p class="howto-sub" data-i18n="howtoSub"></p>
         <div class="steps" id="steps-list"></div>
     </div>
 
-    <!-- BOWL HEATING PRINCIPLES -->
-    <div class="bowl-principles">
+    <!-- ══════════════════════ BOWL HEATING PRINCIPLES ══════════════════════ -->
+    <div class="bowl-principles" id="section-bowl">
         <h2 data-i18n="bowlH2"></h2>
         <p class="bowl-principles-sub" data-i18n="bowlSub"></p>
 
@@ -800,7 +853,7 @@
                 <p data-i18n="bowlPhunnelDesc1"></p>
                 <p data-i18n="bowlPhunnelDesc2"></p>
                 <a class="bowl-img-ref" href="https://imgur.com/oJIN7mh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="10" height="10" rx="1"/><path d="M1 8l3-3 2 2 2-2.5 3 3.5"/><circle cx="8.5" cy="3.5" r="1"/></svg>
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="1" width="10" height="10" rx="1"/><path d="M1 8l3-3 2 2 2-2.5 3 3.5"/><circle cx="8.5" cy="3.5" r="1"/></svg>
                     <span data-i18n="bowlImgRef"></span>
                 </a>
                 <p style="margin-top:12px" data-i18n="bowlPhunnelDesc3"></p>
@@ -822,6 +875,7 @@
         </div>
     </div>
 
+    <!-- ══════════════════════ FOOTER ══════════════════════ -->
     <footer>
         <div class="footer-logo">norhther</div>
         <div class="footer-copy" data-i18n="footerCopy"></div>
@@ -829,68 +883,51 @@
 </div>
 
 <script>
-// ── STRINGS ────────────────────────────────────────────────────────────────
+// ══════════════════════ STRINGS (i18n) ══════════════════════
+// Keys are alphabetically sorted within each language object for easier maintenance.
 const STRINGS = {
     es: {
-        byline: 'norhther — basado en la escala de Sarkis Alexander',
-        eyebrow: 'La Escala de Densidad de',
-        tagline: 'La guía técnica y matemática para el packeo perfecto de tu cachimba.<br>Elimina las suposiciones. Solo ciencia.',
-        calcTag: 'Calculadora de Densidad',
-        inputTitle: 'Cement Pack — Capacidad Máxima',
-        inputNote: 'La cantidad máxima absoluta de tabaco que cabe en tu cazoleta aplastado hasta la dureza máxima. No se fuma a este nivel — solo sirve como tu número de referencia.',
-        sliderMin: '5 g — cazoleta pequeña',
-        sliderMax: 'cazoleta grande — 60 g',
-        calcBtn: 'Calcular Mi Escala',
         bannerLabel: 'Dense Pack Base — Piedra Angular',
         bannerSub: '90% del Cement Pack · referencia para todos los demás niveles',
-        resultsEyebrow: '— Los 5 Niveles de Densidad —',
         barLabel: 'Densidad relativa al Cement Pack',
-        microsLabel: 'Micro-Variaciones',
-        microLight: 'Light',
-        microStd: 'Estándar',
-        microPlus: 'Plus',
-        formulaTag: 'Fórmulas de Referencia',
-        formulaMicro: 'Light −1g · Plus → próx. nivel',
-        viewExpanded: 'Expandido',
-        viewCompact: 'Compacto',
-        themeDark: 'Oscuro',
-        themeLight: 'Claro',
-        howtoH2: 'Cómo Aplicarlo en Casa',
-        howtoSub: 'Cuatro pasos. Una báscula. Resultados perfectos.',
-        steps: [
-            { title: 'Consigue una báscula de precisión', body: 'Que mida en gramos y décimas. La precisión milimétrica es el núcleo de esta escala.' },
-            { title: 'Mide tu Cement Pack', body: 'Llena la cazoleta y aplasta el tabaco hasta que esté duro como una roca. Pesa y apunta ese número.' },
-            { title: 'Introduce aquí tu Cement Pack', body: 'La calculadora obtiene el gramaje exacto para cada nivel. Guarda tu número mágico de Dense Pack.' },
-            { title: 'Elige el nivel según la marca', body: 'Cada nivel señala qué marcas rinden mejor en esa densidad. Multiplica y pesa. Sin suposiciones.' },
-        ],
-        footerCopy: 'Web por norhther — Ciencia y metodología por Sarkis Alexander (Hookah UNLTD) © 2025',
+        bowlBodyConclusion: 'Sin embargo, como ya escribí, esto es difícil de conseguir con cazoletas phunnel. El problema son las cazoletas phunnel muy profundas y el tipo de tabaco seco en la cazoleta. No obstante, puedes probar el método de llenar el tabaco de forma semidensa o densa, incluido el overpacking (1-2 mm por encima del nivel de la cazoleta), aunque el tabaco luego se pegue al papel de aluminio o al HMD. Y usa tabacos de cachimba más húmedos (que son casi todos los tabacos modernos de cachimba que se venden hoy en día). Simplemente depende de muchos factores.',
+        bowlBodyIntro: 'Estos son principios de cazoleta completamente diferentes. Para una sesión de larga duración, en el caso de una cazoleta phunnel necesitas: más volumen de tabaco y bajar la temperatura en la capa de tabaco.',
+        bowlBodyModern: 'Desafortunadamente, las cazoletas phunnel representan una forma moderna de fumar. Fumas principalmente glicerina y sustancias aromáticas. A la gente le gustan las nubes blancas, densas y bonitas, incluso con sustancias aromáticas. Hoy en día, a la gente le gusta menos la hoja de tabaco de calidad y su sabor (lo cual es un privilegio más propio de los tipos tradicionales de cazoletas de cachimba).',
+        bowlBodyPhunnelCooking: 'Como resultado, también obtienes un exceso de densas nubes blancas y aroma. Sin embargo, el sabor de la hoja de tabaco desaparece.',
+        bowlBodyPhunnelProblem: 'Por ello, en el caso de la cazoleta phunnel, también depende de lo profunda que sea la cazoleta y de qué tipo de tabaco uses. Los tabacos húmedos son más ventajosos. Las cazoletas phunnel están diseñadas principalmente para tipos de tabaco de cachimba húmedos, para que el componente líquido (glicerina + aroma + colorante) no fluya hacia el agua del jarrón durante la sesión.',
+        bowlBodySession: 'Sin embargo, en el caso de los tipos phunnel de cazoletas, esto es una solución problemática. Si reduces el calor de la fuente de calor (control HMD, número de piezas de carbón, tamaño de las piezas de carbón, etc.), entonces la temperatura no llegará al fondo de la capa rellena en esta cazoleta phunnel. Al finalizar la sesión de cachimba, el fondo de la capa de tabaco estará crudo, húmedo y sin consumir. Por tanto, en el caso de una cazoleta phunnel, también depende de la profundidad de la cazoleta y del tipo de tabaco que uses.',
+        bowlBodySummary: 'En resumen: si quieres una sesión de cachimba de larga duración, debes usar un gran volumen de tabaco. Debes calentarlo de manera uniforme en toda la capa (esto se aplica siempre y en todas partes). Y dado que hay un gran volumen de tabaco, debes bajar ligeramente la temperatura de la capa de tabaco en comparación con la que usas habitualmente. No importará. Si hay un mayor volumen de tabaco, incluso cuando la temperatura se reduzca, notarás un aroma suficientemente intenso y también tendrás densas nubes blancas. Simplemente tardará un poco más.',
+        bowlBodyTraditional: 'En el caso de los tipos de cazoletas tradicionales, todo es mejor, más tradicional. A las cazoletas tradicionales les gustan los tipos de tabaco de cachimba secos (como el Al Fakher). Agregar más tabaco a una cazoleta tradicional no supone ningún problema. Ni siquiera tienes que regular ni cambiar la temperatura de la fuente de calor en el caso de una cazoleta tradicional. Obtienes el extracto principal de la capa de tabaco en el momento del paso del aire caliente, a través de la capa de tabaco profunda. Pero, por supuesto, el calentamiento pasivo (temperatura de la fuente de calor) en la capa de tabaco también desempeña su papel.',
         bowlH2: 'Cazoleta Tradicional vs Phunnel',
-        bowlSub: 'Principios de calentamiento diferentes para resultados diferentes.',
-        bowlTraditionalTag: 'Cazoleta Tradicional',
-        bowlTraditionalTitle: 'Calentamiento Activo',
-        bowlTraditionalDesc1: 'En la cazoleta tradicional, el calentamiento pasivo desempeña un papel menor y el calentamiento activo desempeña un papel fundamental en el momento del paso del aire caliente a través de toda la capa de tabaco.',
-        bowlTraditionalDesc2: 'Con este tipo de cazoleta, extraes el sabor de toda la capa de tabaco, de arriba abajo por completo.',
-        bowlTraditionalDesc3: 'A las cazoletas tradicionales les gusta el tabaco seco, como el Al Fakher. Agregar más tabaco no es un problema. Obtienes el extracto principal en el momento del paso del aire caliente a través de la capa profunda de tabaco.',
-        bowlPhunnelTag: 'Cazoleta Phunnel',
-        bowlPhunnelTitle: 'Calentamiento Pasivo',
+        bowlHighlight: 'Al mismo tiempo, el componente líquido en el tabaco, si es abundante, puede transferir calor. Esto se utiliza en las cazoletas phunnel. Es básicamente el principio de «cocinar»: toda la capa de tabaco se calienta «cocinando» el componente líquido presente en el tabaco, si lo hay en gran cantidad.',
+        bowlImgRef: 'Imagen de referencia: penetración del aire',
         bowlPhunnelDesc1: 'En la cazoleta phunnel, el calentamiento pasivo lento, de amplia superficie y uniforme es el protagonista. El aire caliente activo al llegar a través de la capa no tiene un gran impacto, porque incluso con el método overpack, el aire caliente atraviesa la capa de tabaco MUY MAL.',
         bowlPhunnelDesc2: 'La capa inferior del tabaco sigue calentándose de forma insuficiente. Por ello, las cazoletas phunnel son más adecuadas para tabacos muy húmedos, donde la glicerina ayuda a transferir el calor hacia el fondo de la capa.',
-        bowlImgRef: 'Imagen de referencia: penetración del aire',
         bowlPhunnelDesc3: 'Las cazoletas phunnel se crearon principalmente para que los tabacos modernos muy húmedos (sobrecargados de glicerina) no se filtraran al agua del jarrón durante la sesión, y para que el componente líquido (glicerina + aroma + colorante) permaneciera en la capa de tabaco.',
+        bowlPhunnelTag: 'Cazoleta Phunnel',
+        bowlPhunnelTitle: 'Calentamiento Pasivo',
         bowlPrinciplesTag: 'Principios en Profundidad',
-        bowlBodyIntro: 'Estos son principios de cazoleta completamente diferentes. Para una sesión de larga duración, en el caso de una cazoleta phunnel necesitas: más volumen de tabaco y bajar la temperatura en la capa de tabaco.',
-        bowlBodySession: 'Sin embargo, en el caso de los tipos phunnel de cazoletas, esto es una solución problemática. Si reduces el calor de la fuente de calor (control HMD, número de piezas de carbón, tamaño de las piezas de carbón, etc.), entonces la temperatura no llegará al fondo de la capa rellena en esta cazoleta phunnel. Al finalizar la sesión de cachimba, el fondo de la capa de tabaco estará crudo, húmedo y sin consumir. Por tanto, en el caso de una cazoleta phunnel, también depende de la profundidad de la cazoleta y del tipo de tabaco que uses.',
         bowlSessionList: [
             'Más volumen de tabaco',
             'Bajar la temperatura en la capa de tabaco',
         ],
-        bowlBodyPhunnelProblem: 'Por ello, en el caso de la cazoleta phunnel, también depende de lo profunda que sea la cazoleta y de qué tipo de tabaco uses. Los tabacos húmedos son más ventajosos. Las cazoletas phunnel están diseñadas principalmente para tipos de tabaco de cachimba húmedos, para que el componente líquido (glicerina + aroma + colorante) no fluya hacia el agua del jarrón durante la sesión.',
-        bowlHighlight: 'Al mismo tiempo, el componente líquido en el tabaco, si es abundante, puede transferir calor. Esto se utiliza en las cazoletas phunnel. Es básicamente el principio de «cocinar»: toda la capa de tabaco se calienta «cocinando» el componente líquido presente en el tabaco, si lo hay en gran cantidad.',
-        bowlBodyPhunnelCooking: 'Como resultado, también obtienes un exceso de densas nubes blancas y aroma. Sin embargo, el sabor de la hoja de tabaco desaparece.',
-        bowlBodyTraditional: 'En el caso de los tipos de cazoletas tradicionales, todo es mejor, más tradicional. A las cazoletas tradicionales les gustan los tipos de tabaco de cachimba secos (como el Al Fakher). Agregar más tabaco a una cazoleta tradicional no supone ningún problema. Ni siquiera tienes que regular ni cambiar la temperatura de la fuente de calor en el caso de una cazoleta tradicional. Obtienes el extracto principal de la capa de tabaco en el momento del paso del aire caliente, a través de la capa de tabaco profunda. Pero, por supuesto, el calentamiento pasivo (temperatura de la fuente de calor) en la capa de tabaco también desempeña su papel.',
-        bowlBodyModern: 'Desafortunadamente, las cazoletas phunnel representan una forma moderna de fumar. Fumas principalmente glicerina y sustancias aromáticas. A la gente le gustan las nubes blancas, densas y bonitas, incluso con sustancias aromáticas. Hoy en día, a la gente le gusta menos la hoja de tabaco de calidad y su sabor (lo cual es un privilegio más propio de los tipos tradicionales de cazoletas de cachimba).',
-        bowlBodySummary: 'En resumen: si quieres una sesión de cachimba de larga duración, debes usar un gran volumen de tabaco. Debes calentarlo de manera uniforme en toda la capa (esto se aplica siempre y en todas partes). Y dado que hay un gran volumen de tabaco, debes bajar ligeramente la temperatura de la capa de tabaco en comparación con la que usas habitualmente. No importará. Si hay un mayor volumen de tabaco, incluso cuando la temperatura se reduzca, notarás un aroma suficientemente intenso y también tendrás densas nubes blancas. Simplemente tardará un poco más.',
-        bowlBodyConclusion: 'Sin embargo, como ya escribí, esto es difícil de conseguir con cazoletas phunnel. El problema son las cazoletas phunnel muy profundas y el tipo de tabaco seco en la cazoleta. No obstante, puedes probar el método de llenar el tabaco de forma semidensa o densa, incluido el overpacking (1-2 mm por encima del nivel de la cazoleta), aunque el tabaco luego se pegue al papel de aluminio o al HMD. Y usa tabacos de cachimba más húmedos (que son casi todos los tabacos modernos de cachimba que se venden hoy en día). Simplemente depende de muchos factores.',
+        bowlSub: 'Principios de calentamiento diferentes para resultados diferentes.',
+        bowlTraditionalDesc1: 'En la cazoleta tradicional, el calentamiento pasivo desempeña un papel menor y el calentamiento activo desempeña un papel fundamental en el momento del paso del aire caliente a través de toda la capa de tabaco.',
+        bowlTraditionalDesc2: 'Con este tipo de cazoleta, extraes el sabor de toda la capa de tabaco, de arriba abajo por completo.',
+        bowlTraditionalDesc3: 'A las cazoletas tradicionales les gusta el tabaco seco, como el Al Fakher. Agregar más tabaco no es un problema. Obtienes el extracto principal en el momento del paso del aire caliente a través de la capa profunda de tabaco.',
+        bowlTraditionalTag: 'Cazoleta Tradicional',
+        bowlTraditionalTitle: 'Calentamiento Activo',
+        byline: 'norhther — basado en la escala de Sarkis Alexander',
+        calcBtn: 'Calcular Mi Escala',
+        calcTag: 'Calculadora de Densidad',
+        eyebrow: 'La Escala de Densidad de',
+        footerCopy: 'Web por norhther — Ciencia y metodología por Sarkis Alexander (Hookah UNLTD) © 2025',
+        formulaMicro: 'Light −1g · Plus → próx. nivel',
+        formulaTag: 'Fórmulas de Referencia',
+        howtoH2: 'Cómo Aplicarlo en Casa',
+        howtoSub: 'Cuatro pasos. Una báscula. Resultados perfectos.',
+        inputNote: 'La cantidad máxima absoluta de tabaco que cabe en tu cazoleta aplastado hasta la dureza máxima. No se fuma a este nivel — solo sirve como tu número de referencia.',
+        inputTitle: 'Cement Pack — Capacidad Máxima',
         levels: [
             { badge: '100% del Dense Pack', desc: 'Tabaco altamente comprimido. Casi sin espacio para el aire, combustión lenta de jugos y hojas. Ideal para tabacos negros con alto contenido de nicotina que requieren calentamiento lento.' },
             { badge: '87.5% del Dense Pack', desc: 'Bastante comprimido, limitando el flujo de aire. Fumada densa y prolongada, soporta más calor que el Normal.' },
@@ -898,67 +935,71 @@ const STRINGS = {
             { badge: '62.5% del Dense Pack', desc: 'Ligeramente más estructurado que el Fluff, con excelente circulación de aire. Para tabacos rubios que soportan un poco más de calor.' },
             { badge: '50% del Dense Pack', desc: 'El tabaco se deja caer libremente. Máximo flujo de aire y calor, mínima compresión. Ocupa todo el volumen con la mitad del peso de un Dense Pack.' },
         ],
+        microLight: 'Light',
+        microPlus: 'Plus',
+        microStd: 'Estándar',
+        microsLabel: 'Micro-Variaciones',
+        resultsEyebrow: '— Los 5 Niveles de Densidad —',
+        sliderMax: 'cazoleta grande — 30 g',
+        sliderMin: '5 g — cazoleta pequeña',
+        steps: [
+            { title: 'Consigue una báscula de precisión', body: 'Que mida en gramos y décimas. La precisión milimétrica es el núcleo de esta escala.' },
+            { title: 'Mide tu Cement Pack', body: 'Llena la cazoleta y aplasta el tabaco hasta que esté duro como una roca. Pesa y apunta ese número.' },
+            { title: 'Introduce aquí tu Cement Pack', body: 'La calculadora obtiene el gramaje exacto para cada nivel. Guarda tu número mágico de Dense Pack.' },
+            { title: 'Elige el nivel según la marca', body: 'Cada nivel señala qué marcas rinden mejor en esa densidad. Multiplica y pesa. Sin suposiciones.' },
+        ],
+        tagline: 'La guía técnica y matemática para el packeo perfecto de tu cachimba.<br>Elimina las suposiciones. Solo ciencia.',
+        themeDark: 'Oscuro',
+        themeLight: 'Claro',
+        tocBowl: 'Cazoleta',
+        tocCalculator: 'Calculadora',
+        tocFormulas: 'Fórmulas',
+        tocHowto: 'Cómo Usarlo',
+        viewCompact: 'Compacto',
+        viewExpanded: 'Expandido',
     },
     en: {
-        byline: 'norhther — based on the Sarkis Alexander scale',
-        eyebrow: 'The Density Scale of',
-        tagline: 'The technical and mathematical guide to perfect hookah packing.<br>Eliminate guesswork. Pure science.',
-        calcTag: 'Density Calculator',
-        inputTitle: 'Cement Pack — Maximum Capacity',
-        inputNote: 'The absolute maximum amount of tobacco that fits in your bowl packed as tight as possible. Not for smoking — this is your reference number only.',
-        sliderMin: '5 g — small bowl',
-        sliderMax: 'large bowl — 60 g',
-        calcBtn: 'Calculate My Scale',
         bannerLabel: 'Dense Pack Base — Cornerstone',
         bannerSub: '90% of Cement Pack · reference point for all other levels',
-        resultsEyebrow: '— The 5 Density Levels —',
         barLabel: 'Density relative to Cement Pack',
-        microsLabel: 'Micro-Variations',
-        microLight: 'Light',
-        microStd: 'Standard',
-        microPlus: 'Plus',
-        formulaTag: 'Formula Reference',
-        formulaMicro: 'Light −1g · Plus → next level',
-        viewExpanded: 'Expanded',
-        viewCompact: 'Compact',
-        themeDark: 'Dark',
-        themeLight: 'Light',
-        howtoH2: 'How to Use at Home',
-        howtoSub: 'Four steps. One scale. Perfect results.',
-        steps: [
-            { title: 'Get a precision scale', body: 'One that measures in grams and tenths. Millimeter precision is the core of this scale.' },
-            { title: 'Measure your Cement Pack', body: 'Fill the bowl and pack the tobacco until it is rock solid. Weigh it and write that number down.' },
-            { title: 'Enter your Cement Pack here', body: 'The calculator gives you the exact gram weight for each level. Save your Dense Pack magic number.' },
-            { title: 'Choose the level for your brand', body: 'Each level shows which brands perform best at that density. Multiply and weigh. No guessing.' },
-        ],
-        footerCopy: 'Web by norhther — Science and methodology by Sarkis Alexander (Hookah UNLTD) © 2025',
+        bowlBodyConclusion: 'However, as noted — this is difficult to achieve with phunnel bowls. The problem is the very deep phunnel bowls and the type of dry tobacco in the bowl. However, you can try the method of filling tobacco semi-dense or dense, including overpacking (1–2 mm above the bowl level) — even if the tobacco then bakes to the foil or HMD. Use wetter hookah tobaccos (which are almost all modern hookah tobaccos sold today). It simply depends on many factors.',
+        bowlBodyIntro: 'These are completely different principles of bowls. For a long-lasting session, in the case of a phunnel bowl you need: more tobacco volume and lower the temperature in the tobacco layer.',
+        bowlBodyModern: 'Unfortunately, phunnel bowls represent a modern way of smoking. You smoke mostly glycerin and aromatic substances. People like nice, thick, white clouds, even with aromatic substances. People today like quality tobacco leaf and its taste less — which is a privilege rather for traditional types of hookah bowls.',
+        bowlBodyPhunnelCooking: 'As a result, you also get an excess of thick white clouds and aroma. However, the taste of the tobacco leaf disappears.',
+        bowlBodyPhunnelProblem: 'Therefore, in the case of the phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use. Moist tobaccos are more advantageous. Phunnel bowls are designed mainly for moist types of hookah tobaccos, so that the liquid component (glycerin + aroma + dye) does not flow out into the water in the vase during smoking.',
+        bowlBodySession: 'However, in the case of phunnel types of bowls, this is a problematic solution. If you reduce the heat of the heat source (HMD control, number of pieces of coal, size of pieces of coal, etc.), then the temperature will not reach the bottom of the filled layer in this phunnel bowl. After the hookah session is over, the bottom of the tobacco layer will be raw, moist and unconsumed. Therefore, in the case of a phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use.',
+        bowlBodySummary: 'To sum it up: if you want a long-lasting hookah session, you have to use a large volume of tobacco. You have to heat it evenly over the entire layer (this applies always and everywhere). And since there is a large volume of tobacco, you have to slightly lower the temperature of the tobacco layer than you usually use. It won\'t matter. If there is a larger volume of tobacco, even when the temperature is lowered, you will feel a sufficiently strong aroma and you will also have thick white clouds. It\'s just that it will take longer.',
+        bowlBodyTraditional: 'In the case of traditional types of bowls, everything is better — more traditional. Traditional types of bowls like dry types of hookah tobacco (such as Al Fakher). Adding more tobacco to a traditional type of bowl is no problem. You don\'t even have to regulate and change the temperature of the heat source in the case of a traditional bowl. You get the main extract from the tobacco layer at the moment of passage of hot air, through the deep tobacco layer. But of course, passive heating (temperature of the heat source) in the tobacco layer also plays its role.',
         bowlH2: 'Traditional vs Phunnel Bowl',
-        bowlSub: 'Different heating principles for different results.',
-        bowlTraditionalTag: 'Traditional Bowl',
-        bowlTraditionalTitle: 'Active Heating',
-        bowlTraditionalDesc1: 'In the case of a traditional bowl, passive heating plays a small role and active heating plays a major role at the moment of passage of hot air through the entire tobacco layer.',
-        bowlTraditionalDesc2: 'With this type of bowl, you get the flavor from the entire tobacco layer, completely from top to bottom.',
-        bowlTraditionalDesc3: 'Traditional bowls like dry types of hookah tobacco, such as Al Fakher. Adding more tobacco is no problem. You get the main extract from the tobacco layer at the moment of passage of hot air through the deep layer.',
-        bowlPhunnelTag: 'Phunnel Bowl',
-        bowlPhunnelTitle: 'Passive Heating',
+        bowlHighlight: 'At the same time, the liquid component in the tobacco, if there is a lot of it, can transfer heat. This is used in phunnel bowls. It is basically the principle of "cooking" — the entire tobacco layer is heated by "cooking" the liquid component present in the tobacco, if there is a lot of it.',
+        bowlImgRef: 'Reference image: air penetration',
         bowlPhunnelDesc1: 'In the case of a phunnel bowl, slow, wide-surface, even, passive heating plays a major role. Active hot air at the moment of arrival through the layer does not have a big impact, because even with the overpack method, the hot air still penetrates through the tobacco layer VERY BADLY.',
         bowlPhunnelDesc2: 'The bottom layer of tobacco is still insufficiently heated. Therefore, phunnel bowls are more suitable for very moist tobaccos, where glycerin helps to transfer heat to the bottom of the tobacco layer.',
-        bowlImgRef: 'Reference image: air penetration',
         bowlPhunnelDesc3: 'Phunnel bowls were created mainly so that today\'s very moist tobaccos (overfilled with glycerin) would not leak out into the water in the vase during smoking, and so that the liquid component (glycerin + flavor + dye) would remain in the tobacco layer.',
+        bowlPhunnelTag: 'Phunnel Bowl',
+        bowlPhunnelTitle: 'Passive Heating',
         bowlPrinciplesTag: 'Principles In Depth',
-        bowlBodyIntro: 'These are completely different principles of bowls. For a long-lasting session, in the case of a phunnel bowl you need: more tobacco volume and lower the temperature in the tobacco layer.',
-        bowlBodySession: 'However, in the case of phunnel types of bowls, this is a problematic solution. If you reduce the heat of the heat source (HMD control, number of pieces of coal, size of pieces of coal, etc.), then the temperature will not reach the bottom of the filled layer in this phunnel bowl. After the hookah session is over, the bottom of the tobacco layer will be raw, moist and unconsumed. Therefore, in the case of a phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use.',
         bowlSessionList: [
             'More tobacco volume',
             'Lower the temperature in the tobacco layer',
         ],
-        bowlBodyPhunnelProblem: 'Therefore, in the case of the phunnel bowl, it also depends on how deep this bowl is and what type of tobacco you use. Moist tobaccos are more advantageous. Phunnel bowls are designed mainly for moist types of hookah tobaccos, so that the liquid component (glycerin + aroma + dye) does not flow out into the water in the vase during smoking.',
-        bowlHighlight: 'At the same time, the liquid component in the tobacco, if there is a lot of it, can transfer heat. This is used in phunnel bowls. It is basically the principle of "cooking" — the entire tobacco layer is heated by "cooking" the liquid component present in the tobacco, if there is a lot of it.',
-        bowlBodyPhunnelCooking: 'As a result, you also get an excess of thick white clouds and aroma. However, the taste of the tobacco leaf disappears.',
-        bowlBodyTraditional: 'In the case of traditional types of bowls, everything is better — more traditional. Traditional types of bowls like dry types of hookah tobacco (such as Al Fakher). Adding more tobacco to a traditional type of bowl is no problem. You don\'t even have to regulate and change the temperature of the heat source in the case of a traditional bowl. You get the main extract from the tobacco layer at the moment of passage of hot air, through the deep tobacco layer. But of course, passive heating (temperature of the heat source) in the tobacco layer also plays its role.',
-        bowlBodyModern: 'Unfortunately, phunnel bowls represent a modern way of smoking. You smoke mostly glycerin and aromatic substances. People like nice, thick, white clouds, even with aromatic substances. People today like quality tobacco leaf and its taste less — which is a privilege rather for traditional types of hookah bowls.',
-        bowlBodySummary: 'To sum it up: if you want a long-lasting hookah session, you have to use a large volume of tobacco. You have to heat it evenly over the entire layer (this applies always and everywhere). And since there is a large volume of tobacco, you have to slightly lower the temperature of the tobacco layer than you usually use. It won\'t matter. If there is a larger volume of tobacco, even when the temperature is lowered, you will feel a sufficiently strong aroma and you will also have thick white clouds. It\'s just that it will take longer.',
-        bowlBodyConclusion: 'However, as noted — this is difficult to achieve with phunnel bowls. The problem is the very deep phunnel bowls and the type of dry tobacco in the bowl. However, you can try the method of filling tobacco semi-dense or dense, including overpacking (1–2 mm above the bowl level) — even if the tobacco then bakes to the foil or HMD. Use wetter hookah tobaccos (which are almost all modern hookah tobaccos sold today). It simply depends on many factors.',
+        bowlSub: 'Different heating principles for different results.',
+        bowlTraditionalDesc1: 'In the case of a traditional bowl, passive heating plays a small role and active heating plays a major role at the moment of passage of hot air through the entire tobacco layer.',
+        bowlTraditionalDesc2: 'With this type of bowl, you get the flavor from the entire tobacco layer, completely from top to bottom.',
+        bowlTraditionalDesc3: 'Traditional bowls like dry types of hookah tobacco, such as Al Fakher. Adding more tobacco is no problem. You get the main extract from the tobacco layer at the moment of passage of hot air through the deep layer.',
+        bowlTraditionalTag: 'Traditional Bowl',
+        bowlTraditionalTitle: 'Active Heating',
+        byline: 'norhther — based on the Sarkis Alexander scale',
+        calcBtn: 'Calculate My Scale',
+        calcTag: 'Density Calculator',
+        eyebrow: 'The Density Scale of',
+        footerCopy: 'Web by norhther — Science and methodology by Sarkis Alexander (Hookah UNLTD) © 2025',
+        formulaMicro: 'Light −1g · Plus → next level',
+        formulaTag: 'Formula Reference',
+        howtoH2: 'How to Use at Home',
+        howtoSub: 'Four steps. One scale. Perfect results.',
+        inputNote: 'The absolute maximum amount of tobacco that fits in your bowl packed as tight as possible. Not for smoking — this is your reference number only.',
+        inputTitle: 'Cement Pack — Maximum Capacity',
         levels: [
             { badge: '100% of Dense Pack', desc: 'Highly compressed tobacco. Almost no airflow, slow combustion. Ideal for dark tobacco with high nicotine content that requires slow heating.' },
             { badge: '87.5% of Dense Pack', desc: 'Quite compressed, limiting airflow. Dense and prolonged session, supports more heat than Normal.' },
@@ -966,18 +1007,46 @@ const STRINGS = {
             { badge: '62.5% of Dense Pack', desc: 'Slightly more structured than Fluff, with excellent airflow. For light blonde tobaccos that handle a bit more heat.' },
             { badge: '50% of Dense Pack', desc: 'Tobacco falls freely. Maximum airflow and heat, minimum compression. Fills the full volume at half the weight of a Dense Pack.' },
         ],
+        microLight: 'Light',
+        microPlus: 'Plus',
+        microStd: 'Standard',
+        microsLabel: 'Micro-Variations',
+        resultsEyebrow: '— The 5 Density Levels —',
+        sliderMax: 'large bowl — 30 g',
+        sliderMin: '5 g — small bowl',
+        steps: [
+            { title: 'Get a precision scale', body: 'One that measures in grams and tenths. Millimeter precision is the core of this scale.' },
+            { title: 'Measure your Cement Pack', body: 'Fill the bowl and pack the tobacco until it is rock solid. Weigh it and write that number down.' },
+            { title: 'Enter your Cement Pack here', body: 'The calculator gives you the exact gram weight for each level. Save your Dense Pack magic number.' },
+            { title: 'Choose the level for your brand', body: 'Each level shows which brands perform best at that density. Multiply and weigh. No guessing.' },
+        ],
+        tagline: 'The technical and mathematical guide to perfect hookah packing.<br>Eliminate guesswork. Pure science.',
+        themeDark: 'Dark',
+        themeLight: 'Light',
+        tocBowl: 'Bowl',
+        tocCalculator: 'Calculator',
+        tocFormulas: 'Formulas',
+        tocHowto: 'How To',
+        viewCompact: 'Compact',
+        viewExpanded: 'Expanded',
     },
 };
 
-// ── LEVEL DATA (language-independent) ────────────────────────────────────
+// ══════════════════════ LEVEL DATA (language-independent) ══════════════════════
+// Ordered from densest (Dense Pack) to lightest (Fluff Pack).
+// Results cards are rendered in this order (dense → fluff).
+// The TOC and density chips in the formula grid follow the same order.
 const LEVELS = [
-    { key: 'dense',      name: 'Dense Pack',      pct: 1.0,   color: 'var(--dense)',      rgb: 'var(--dense-rgb)',      brands: ['Tangiers', 'Zomo Strong', 'KFC (Kashmir)', 'Lavoo Heritage', 'Serpent'],                          micro: true },
-    { key: 'semi-dense', name: 'Semi-Dense Pack',  pct: 0.875, color: 'var(--semi-dense)', rgb: 'var(--semi-dense-rgb)', brands: ['Darkside', 'Trifecta Dark', 'Zomo Blonde', 'Nakhla', 'Must Have', 'Black Lava'],                  micro: true },
-    { key: 'normal',     name: 'Normal Pack',      pct: 0.75,  color: 'var(--normal)',     rgb: 'var(--normal-rgb)',     brands: ['Al Fakher', 'Azure Blonde', 'Adalya', 'Haze', 'Element Air', 'Overdozz', 'Hookafina'],            micro: true },
-    { key: 'semi-fluff', name: 'Semi-Fluff Pack',  pct: 0.625, color: 'var(--semi-fluff)', rgb: 'var(--semi-fluff-rgb)', brands: ['Social Smoke (blonde)', 'Fumari', 'Afzal'],                                                       micro: false },
-    { key: 'fluff',      name: 'Fluff Pack',       pct: 0.5,   color: 'var(--fluff)',      rgb: 'var(--fluff-rgb)',      brands: ['Social Smoke', 'Chaos', 'Traditionelle (DE)'],                                                    micro: false },
+    { key: 'dense',      name: 'Dense Pack',      pct: 1.0,   color: 'var(--dense)',      rgb: 'var(--dense-rgb)',      brands: ['Tangiers', 'Zomo Strong', 'KFC (Kashmir)', 'Lavoo Heritage', 'Serpent'],                 micro: true  },
+    { key: 'semi-dense', name: 'Semi-Dense Pack',  pct: 0.875, color: 'var(--semi-dense)', rgb: 'var(--semi-dense-rgb)', brands: ['Darkside', 'Trifecta Dark', 'Zomo Blonde', 'Nakhla', 'Must Have', 'Black Lava'],         micro: true  },
+    { key: 'normal',     name: 'Normal Pack',      pct: 0.75,  color: 'var(--normal)',     rgb: 'var(--normal-rgb)',     brands: ['Al Fakher', 'Azure Blonde', 'Adalya', 'Haze', 'Element Air', 'Overdozz', 'Hookafina'], micro: true  },
+    { key: 'semi-fluff', name: 'Semi-Fluff Pack',  pct: 0.625, color: 'var(--semi-fluff)', rgb: 'var(--semi-fluff-rgb)', brands: ['Social Smoke (blonde)', 'Fumari', 'Afzal'],                                              micro: false },
+    { key: 'fluff',      name: 'Fluff Pack',       pct: 0.5,   color: 'var(--fluff)',      rgb: 'var(--fluff-rgb)',      brands: ['Social Smoke', 'Chaos', 'Traditionelle (DE)'],                                           micro: false },
 ];
 
+// ══════════════════════ HELPERS ══════════════════════
+
+/** Returns the weight at the next density step above `pct`, or cement if already at max. */
 function nextWeight(dense, pct, cement) {
     const order = [0.5, 0.625, 0.75, 0.875, 1.0];
     const idx = order.indexOf(pct);
@@ -986,12 +1055,27 @@ function nextWeight(dense, pct, cement) {
     return cement;
 }
 
-// ── STATE ─────────────────────────────────────────────────────────────────
+/** Builds the three micro-variation boxes for a given level weight. */
+function buildMicrosHTML(w, nw, S) {
+    const light = (w - 1).toFixed(1);
+    const plus  = ((w + nw) / 2).toFixed(1);
+    return `
+        <div class="micros">
+            <div class="micros-label">${S.microsLabel}</div>
+            <div class="micros-row">
+                <div class="micro"><div class="micro-n">${S.microLight}</div><div class="micro-v">${light}<small>g</small></div></div>
+                <div class="micro"><div class="micro-n">${S.microStd}</div><div class="micro-v">${w.toFixed(1)}<small>g</small></div></div>
+                <div class="micro"><div class="micro-n">${S.microPlus}</div><div class="micro-v">${plus}<small>g</small></div></div>
+            </div>
+        </div>`;
+}
+
+// ══════════════════════ STATE ══════════════════════
 let lang  = localStorage.getItem('lang')  || 'es';
 let theme = localStorage.getItem('theme') || 'dark';
 let view  = localStorage.getItem('view')  || 'expanded';
 
-// ── CANVAS EMBERS ─────────────────────────────────────────────────────────
+// ══════════════════════ CANVAS EMBERS ══════════════════════
 const CV = document.getElementById('canvas-bg');
 const CX = CV.getContext('2d');
 let W, H;
@@ -1044,23 +1128,26 @@ const embers = Array.from({length: 90}, (_, i) => new Ember(true));
     requestAnimationFrame(loop);
 })();
 
-// ── SLIDER / INPUT SYNC ───────────────────────────────────────────────────
+// ══════════════════════ SLIDER / INPUT SYNC ══════════════════════
 const slider = document.getElementById('slider');
 const numbox = document.getElementById('numbox');
+const MAX_WEIGHT = 30;
+const MIN_WEIGHT = 5;
 
 function syncSlider() {
     const pct = ((+slider.value - +slider.min) / (+slider.max - +slider.min) * 100).toFixed(2) + '%';
     slider.style.setProperty('--pct', pct);
+    slider.setAttribute('aria-valuenow', slider.value);
 }
 
 slider.addEventListener('input', () => { numbox.value = slider.value; syncSlider(); calculate(); });
 numbox.addEventListener('input', () => {
     const v = parseFloat(numbox.value);
-    if (!isNaN(v) && v >= 5 && v <= 60) { slider.value = v; syncSlider(); calculate(); }
+    if (!isNaN(v) && v >= MIN_WEIGHT && v <= MAX_WEIGHT) { slider.value = v; syncSlider(); calculate(); }
 });
 syncSlider();
 
-// ── APPLY LANGUAGE ────────────────────────────────────────────────────────
+// ══════════════════════ APPLY LANGUAGE ══════════════════════
 function applyLang() {
     const S = STRINGS[lang];
     document.documentElement.lang = lang;
@@ -1071,16 +1158,16 @@ function applyLang() {
         if (S[key] !== undefined) el.innerHTML = S[key];
     });
 
-    // Steps
+    // Steps (numbered 01–04 sequentially)
     const stepsList = document.getElementById('steps-list');
     stepsList.innerHTML = S.steps.map((s, i) => `
         <div class="glass step">
-            <div class="step-num">0${i+1}</div>
+            <div class="step-num">0${i + 1}</div>
             <div class="step-title">${s.title}</div>
             <p class="step-body">${s.body}</p>
         </div>`).join('');
 
-    // Bowl session list (static strings, safe to use innerHTML)
+    // Bowl session list
     const bowlList = document.getElementById('bowl-session-list');
     if (bowlList && S.bowlSessionList) {
         bowlList.innerHTML = S.bowlSessionList.map(item => `<li>${item}</li>`).join('');
@@ -1091,10 +1178,10 @@ function applyLang() {
     document.getElementById('tb-en').classList.toggle('active', lang === 'en');
 }
 
-// ── APPLY THEME ───────────────────────────────────────────────────────────
+// ══════════════════════ APPLY THEME ══════════════════════
 function applyTheme() {
     document.documentElement.dataset.theme = theme;
-    // Reset ember colors
+    // Refresh ember colors to match theme
     embers.forEach(e => {
         const palette = theme === 'light' ? LIGHT_COLORS : DARK_COLORS;
         const c = palette[Math.floor(Math.random() * palette.length)];
@@ -1104,22 +1191,22 @@ function applyTheme() {
     document.getElementById('tb-light').classList.toggle('active', theme === 'light');
 }
 
-// ── APPLY VIEW ────────────────────────────────────────────────────────────
+// ══════════════════════ APPLY VIEW ══════════════════════
 function applyView() {
     document.getElementById('cards-list').classList.toggle('compact', view === 'compact');
     document.getElementById('tb-expanded').classList.toggle('active', view === 'expanded');
     document.getElementById('tb-compact').classList.toggle('active', view === 'compact');
 }
 
-// ── SETTERS (persist + apply) ─────────────────────────────────────────────
+// ══════════════════════ SETTERS (persist + apply) ══════════════════════
 function setLang(l)  { lang = l;  localStorage.setItem('lang',  l); applyLang(); calculate(); }
 function setTheme(t) { theme = t; localStorage.setItem('theme', t); applyTheme(); }
 function setView(v)  { view = v;  localStorage.setItem('view',  v); applyView(); }
 
-// ── CALCULATE ─────────────────────────────────────────────────────────────
+// ══════════════════════ CALCULATE ══════════════════════
 function calculate() {
-    const S = STRINGS[lang];
-    const cement = Math.max(5, Math.min(60, parseFloat(numbox.value) || 22));
+    const S      = STRINGS[lang];
+    const cement = Math.max(MIN_WEIGHT, Math.min(MAX_WEIGHT, parseFloat(numbox.value) || 15));
     const dense  = cement * 0.9;
 
     document.getElementById('base-num').innerHTML = `${dense.toFixed(1)}<sup>g</sup>`;
@@ -1134,21 +1221,7 @@ function calculate() {
         const w  = dense * lvl.pct;
         const nw = nextWeight(dense, lvl.pct, cement);
 
-        let microsHTML = '';
-        if (lvl.micro) {
-            const light = (w - 1).toFixed(1);
-            const plus  = ((w + nw) / 2).toFixed(1);
-            microsHTML = `
-                <div class="micros">
-                    <div class="micros-label">${S.microsLabel}</div>
-                    <div class="micros-row">
-                        <div class="micro"><div class="micro-n">${S.microLight}</div><div class="micro-v">${light}<small>g</small></div></div>
-                        <div class="micro"><div class="micro-n">${S.microStd}</div><div class="micro-v">${w.toFixed(1)}<small>g</small></div></div>
-                        <div class="micro"><div class="micro-n">${S.microPlus}</div><div class="micro-v">${plus}<small>g</small></div></div>
-                    </div>
-                </div>`;
-        }
-
+        const microsHTML = lvl.micro ? buildMicrosHTML(w, nw, S) : '';
         const chips = lvl.brands.map(b => `<span class="chip">${b}</span>`).join('');
 
         const card = document.createElement('div');
@@ -1185,7 +1258,7 @@ function calculate() {
     applyView();
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────
+// ══════════════════════ INIT ══════════════════════
 applyLang();
 applyTheme();
 applyView();
