@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
 
-/* ══════════════════════ THEME: DARK (default) ══════════════════════ */
+        /* ══════════════════════ THEME: DARK (default) ══════════════════════ */
         :root {
             --void: #060407;
             --deep: #0c0910;
@@ -40,7 +40,7 @@
             --dense: #ef4444;      --dense-rgb: 239, 68, 68;
         }
 
-/* ══════════════════════ THEME: LIGHT ══════════════════════ */
+        /* ══════════════════════ THEME: LIGHT ══════════════════════ */
         [data-theme="light"] {
             --void: #f4ede0;
             --deep: #ede4d3;
@@ -83,7 +83,7 @@
 
         [data-theme="light"] #canvas-bg { opacity: var(--canvas-opacity); }
 
-/* ══════════════════════ BASE RESET & GLOBALS ══════════════════════ */
+        /* ══════════════════════ BASE RESET & GLOBALS ══════════════════════ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
@@ -96,7 +96,7 @@
             transition: background 0.3s, color 0.3s;
         }
 
-/* ══════════════════════ CSS: BACKGROUND ══════════════════════ */
+        /* ══════════════════════ CSS: BACKGROUND ══════════════════════ */
         #canvas-bg {
             position: fixed; inset: 0; z-index: 0;
             pointer-events: none;
@@ -113,7 +113,7 @@
             transition: background 0.4s;
         }
 
-/* ══════════════════════ CSS: TOOLBAR ══════════════════════ */
+        /* ══════════════════════ CSS: TOOLBAR ══════════════════════ */
         .toolbar {
             position: fixed;
             top: 14px; right: 18px;
@@ -170,14 +170,14 @@
             margin-right: 3px;
         }
 
-/* ══════════════════════ CSS: LAYOUT ══════════════════════ */
+        /* ══════════════════════ CSS: LAYOUT ══════════════════════ */
         .wrap {
             position: relative; z-index: 2;
             max-width: 920px; margin: 0 auto;
             padding: 0 24px;
         }
 
-/* ══════════════════════ CSS: HEADER ══════════════════════ */
+        /* ══════════════════════ CSS: HEADER ══════════════════════ */
         header { padding: 72px 0 48px; text-align: center; }
 
         .byline {
@@ -243,7 +243,7 @@
             border-color: var(--gold-dim);
         }
 
-/* ══════════════════════ CSS: GLASS CARD ══════════════════════ */
+        /* ══════════════════════ CSS: GLASS CARD ══════════════════════ */
         .glass {
             background: var(--surface);
             backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
@@ -258,7 +258,7 @@
             pointer-events: none;
         }
 
-/* ══════════════════════ CSS: CALCULATOR CARD ══════════════════════ */
+        /* ══════════════════════ CSS: CALCULATOR CARD ══════════════════════ */
         .calc-card { padding: 40px 44px; margin-bottom: 18px; }
 
         .section-tag {
@@ -349,7 +349,7 @@
         .calc-btn:hover::after { opacity: 1; }
         .calc-btn:active { transform: translateY(0); }
 
-/* ══════════════════════ CSS: DENSE BASE BANNER ══════════════════════ */
+        /* ══════════════════════ CSS: DENSE BASE BANNER ══════════════════════ */
         .base-banner {
             display: none; background: rgba(200,147,42,0.055);
             border: 1px solid var(--border-strong);
@@ -371,7 +371,7 @@
         .base-banner-num sup { font-size: 20px; opacity: 0.6; letter-spacing: 0; font-weight: 300; }
         .base-banner-sub { font-style: italic; font-size: 14px; color: var(--text-low); margin-top: 5px; }
 
-/* ══════════════════════ CSS: RESULTS ══════════════════════ */
+        /* ══════════════════════ CSS: RESULTS ══════════════════════ */
         #results { display: none; }
         #results.on { display: block; }
 
@@ -386,7 +386,7 @@
             color: var(--text-low); flex: 1; text-align: center;
         }
 
-/* ══════════════════════ CSS: CARDS LIST ══════════════════════ */
+        /* ══════════════════════ CSS: CARDS LIST ══════════════════════ */
         .cards-list { display: flex; flex-direction: column; gap: 11px; }
 
         /* Compact mode */
@@ -402,7 +402,7 @@
         .cards-list.compact .card-weight { font-size: 36px; margin: 4px 0 8px; }
         .cards-list.compact .chips { margin-top: 8px; }
 
-/* ══════════════════════ CSS: PACK CARD ══════════════════════ */
+        /* ══════════════════════ CSS: PACK CARD ══════════════════════ */
         .pack-card {
             border-left: 3px solid var(--c, var(--gold));
             padding: 26px 30px 22px;
@@ -502,7 +502,7 @@
         }
         .micro-v small { font-size: 11px; opacity: 0.55; }
 
-/* ══════════════════════ CSS: FORMULA REFERENCE ══════════════════════ */
+        /* ══════════════════════ CSS: FORMULA REFERENCE ══════════════════════ */
         .formula-ref { margin: 0 0 52px; padding: 32px 36px; }
         .formula-ref .section-tag { margin-bottom: 20px; }
         .formula-grid {
@@ -519,7 +519,7 @@
         }
         .fc-formula { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--c, var(--gold)); }
 
-/* ══════════════════════ CSS: HOW TO STEPS ══════════════════════ */
+        /* ══════════════════════ CSS: HOW TO STEPS ══════════════════════ */
         .howto { margin: 60px 0 52px; }
         .howto h2 {
             font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px);
@@ -538,7 +538,7 @@
         .step-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; margin-bottom: 8px; }
         .step-body { font-size: 14.5px; color: var(--text-mid); line-height: 1.6; }
 
-/* ══════════════════════ CSS: BOWL PRINCIPLES ══════════════════════ */
+        /* ══════════════════════ CSS: BOWL PRINCIPLES ══════════════════════ */
         .bowl-principles { margin: 60px 0 52px; }
         .bowl-principles h2 {
             font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px);
@@ -644,7 +644,7 @@
             line-height: 1.7; margin: 18px 0;
         }
 
-/* ══════════════════════ CSS: FOOTER ══════════════════════ */
+        /* ══════════════════════ CSS: FOOTER ══════════════════════ */
         footer { border-top: 1px solid var(--border); padding: 36px 0 56px; text-align: center; }
         .footer-logo {
             font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 5px;
@@ -652,13 +652,13 @@
         }
         .footer-copy { font-style: italic; font-size: 13px; color: var(--text-low); }
 
-/* ══════════════════════ CSS: ANIMATIONS ══════════════════════ */
+        /* ══════════════════════ CSS: ANIMATIONS ══════════════════════ */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-/* ══════════════════════ CSS: RESPONSIVE ══════════════════════ */
+        /* ══════════════════════ CSS: RESPONSIVE ══════════════════════ */
         @media (max-width: 640px) {
             .toolbar { top: auto; bottom: 14px; right: 50%; transform: translateX(50%); }
             .tb-btn svg + span { display: none; }
@@ -929,11 +929,11 @@ const STRINGS = {
         inputNote: 'La cantidad máxima absoluta de tabaco que cabe en tu cazoleta aplastado hasta la dureza máxima. No se fuma a este nivel — solo sirve como tu número de referencia.',
         inputTitle: 'Cement Pack — Capacidad Máxima',
         levels: [
-            { badge: '100% del Dense Pack', desc: 'Tabaco altamente comprimido. Casi sin espacio para el aire, combustión lenta de jugos y hojas. Ideal para tabacos negros con alto contenido de nicotina que requieren calentamiento lento.' },
-            { badge: '87.5% del Dense Pack', desc: 'Bastante comprimido, limitando el flujo de aire. Fumada densa y prolongada, soporta más calor que el Normal.' },
-            { badge: '75% del Dense Pack', desc: 'El punto intermedio exacto. Se presiona ligeramente para dar estructura, sin apelmazarlo. El más versátil de la escala.' },
-            { badge: '62.5% del Dense Pack', desc: 'Ligeramente más estructurado que el Fluff, con excelente circulación de aire. Para tabacos rubios que soportan un poco más de calor.' },
             { badge: '50% del Dense Pack', desc: 'El tabaco se deja caer libremente. Máximo flujo de aire y calor, mínima compresión. Ocupa todo el volumen con la mitad del peso de un Dense Pack.' },
+            { badge: '62.5% del Dense Pack', desc: 'Ligeramente más estructurado que el Fluff, con excelente circulación de aire. Para tabacos rubios que soportan un poco más de calor.' },
+            { badge: '75% del Dense Pack', desc: 'El punto intermedio exacto. Se presiona ligeramente para dar estructura, sin apelmazarlo. El más versátil de la escala.' },
+            { badge: '87.5% del Dense Pack', desc: 'Bastante comprimido, limitando el flujo de aire. Fumada densa y prolongada, soporta más calor que el Normal.' },
+            { badge: '100% del Dense Pack', desc: 'Tabaco altamente comprimido. Casi sin espacio para el aire, combustión lenta de jugos y hojas. Ideal para tabacos negros con alto contenido de nicotina que requieren calentamiento lento.' },
         ],
         microLight: 'Light',
         microPlus: 'Plus',
@@ -1001,11 +1001,11 @@ const STRINGS = {
         inputNote: 'The absolute maximum amount of tobacco that fits in your bowl packed as tight as possible. Not for smoking — this is your reference number only.',
         inputTitle: 'Cement Pack — Maximum Capacity',
         levels: [
-            { badge: '100% of Dense Pack', desc: 'Highly compressed tobacco. Almost no airflow, slow combustion. Ideal for dark tobacco with high nicotine content that requires slow heating.' },
-            { badge: '87.5% of Dense Pack', desc: 'Quite compressed, limiting airflow. Dense and prolonged session, supports more heat than Normal.' },
-            { badge: '75% of Dense Pack', desc: 'The exact midpoint. Lightly pressed for structure, without over-packing. The most versatile level.' },
-            { badge: '62.5% of Dense Pack', desc: 'Slightly more structured than Fluff, with excellent airflow. For light blonde tobaccos that handle a bit more heat.' },
             { badge: '50% of Dense Pack', desc: 'Tobacco falls freely. Maximum airflow and heat, minimum compression. Fills the full volume at half the weight of a Dense Pack.' },
+            { badge: '62.5% of Dense Pack', desc: 'Slightly more structured than Fluff, with excellent airflow. For light blonde tobaccos that handle a bit more heat.' },
+            { badge: '75% of Dense Pack', desc: 'The exact midpoint. Lightly pressed for structure, without over-packing. The most versatile level.' },
+            { badge: '87.5% of Dense Pack', desc: 'Quite compressed, limiting airflow. Dense and prolonged session, supports more heat than Normal.' },
+            { badge: '100% of Dense Pack', desc: 'Highly compressed tobacco. Almost no airflow, slow combustion. Ideal for dark tobacco with high nicotine content that requires slow heating.' },
         ],
         microLight: 'Light',
         microPlus: 'Plus',
@@ -1033,15 +1033,14 @@ const STRINGS = {
 };
 
 // ══════════════════════ LEVEL DATA (language-independent) ══════════════════════
-// Ordered from densest (Dense Pack) to lightest (Fluff Pack).
-// Results cards are rendered in this order (dense → fluff).
-// The TOC and density chips in the formula grid follow the same order.
+// Ordered from lightest (Fluff Pack) to densest (Dense Pack).
+// Results cards are rendered in this order (fluff → dense).
 const LEVELS = [
-    { key: 'dense',      name: 'Dense Pack',      pct: 1.0,   color: 'var(--dense)',      rgb: 'var(--dense-rgb)',      brands: ['Tangiers', 'Zomo Strong', 'KFC (Kashmir)', 'Lavoo Heritage', 'Serpent'],                 micro: true  },
-    { key: 'semi-dense', name: 'Semi-Dense Pack',  pct: 0.875, color: 'var(--semi-dense)', rgb: 'var(--semi-dense-rgb)', brands: ['Darkside', 'Trifecta Dark', 'Zomo Blonde', 'Nakhla', 'Must Have', 'Black Lava'],         micro: true  },
-    { key: 'normal',     name: 'Normal Pack',      pct: 0.75,  color: 'var(--normal)',     rgb: 'var(--normal-rgb)',     brands: ['Al Fakher', 'Azure Blonde', 'Adalya', 'Haze', 'Element Air', 'Overdozz', 'Hookafina'], micro: true  },
-    { key: 'semi-fluff', name: 'Semi-Fluff Pack',  pct: 0.625, color: 'var(--semi-fluff)', rgb: 'var(--semi-fluff-rgb)', brands: ['Social Smoke (blonde)', 'Fumari', 'Afzal'],                                              micro: false },
     { key: 'fluff',      name: 'Fluff Pack',       pct: 0.5,   color: 'var(--fluff)',      rgb: 'var(--fluff-rgb)',      brands: ['Social Smoke', 'Chaos', 'Traditionelle (DE)'],                                           micro: false },
+    { key: 'semi-fluff', name: 'Semi-Fluff Pack',  pct: 0.625, color: 'var(--semi-fluff)', rgb: 'var(--semi-fluff-rgb)', brands: ['Social Smoke (blonde)', 'Fumari', 'Afzal'],                                              micro: false },
+    { key: 'normal',     name: 'Normal Pack',      pct: 0.75,  color: 'var(--normal)',     rgb: 'var(--normal-rgb)',     brands: ['Al Fakher', 'Azure Blonde', 'Adalya', 'Haze', 'Element Air', 'Overdozz', 'Hookafina'], micro: true  },
+    { key: 'semi-dense', name: 'Semi-Dense Pack',  pct: 0.875, color: 'var(--semi-dense)', rgb: 'var(--semi-dense-rgb)', brands: ['Darkside', 'Trifecta Dark', 'Zomo Blonde', 'Nakhla', 'Must Have', 'Black Lava'],         micro: true  },
+    { key: 'dense',      name: 'Dense Pack',      pct: 1.0,   color: 'var(--dense)',      rgb: 'var(--dense-rgb)',      brands: ['Tangiers', 'Zomo Strong', 'KFC (Kashmir)', 'Lavoo Heritage', 'Serpent'],                 micro: true  },
 ];
 
 // ══════════════════════ HELPERS ══════════════════════
